@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"gui","l":"GraphicalElement"},{"p":"gui","l":"GUISimulator"},{"p":"gui","l":"ImageElement"},{"p":"gui","l":"Oval"},{"p":"gui","l":"Rectangle"},{"p":"gui","l":"Simulable"},{"p":"gui","l":"Text"}];updateSearchResults();
