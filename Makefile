@@ -30,10 +30,6 @@ runTestInvader: compileTestInvader
 clean:
 	rm -rf bin/
 
-# ========= Multi-Agents (src/multi_agents) convenience targets =========
-# These wrappers let you run the multi-agents Makefile from the repo root.
-# They delegate to the Makefile that lives in src/multi_agents/ without
-# duplicating compile/run logic.
 
 .PHONY: run-ecosystem run-multi run-events run-boids multi_agents-compile multi_agents-clean multi_agents-help
 
