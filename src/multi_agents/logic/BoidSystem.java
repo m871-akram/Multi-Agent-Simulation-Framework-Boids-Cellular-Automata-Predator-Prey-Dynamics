@@ -78,14 +78,14 @@ public abstract class BoidSystem {
      * Permet d'éviter instanceof et respecter le principe du polymorphisme.
      * @return true si ce système représente des prédateurs, false sinon
      */
-    public abstract boolean isPredator();
+    public abstract boolean ispredateur();
     
     /**
      * Indique si ce système est un système de proies.
      * Permet d'éviter instanceof et respecter le principe du polymorphisme.
      * @return true si ce système représente des proies, false sinon
      */
-    public abstract boolean isPrey();
+    public abstract boolean isproie();
 
     /**
      * Réinitialise tout le système en replaçant les boids aléatoirement.

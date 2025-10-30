@@ -89,8 +89,8 @@ multi_agents/
 │   ├── Boid.java
 │   ├── Vecteur2D.java
 │   ├── BoidSystem.java
-│   ├── PreyBoidSystem.java
-│   ├── PredatorBoidSystem.java
+│   ├── ProieBoidSystem.java
+│   ├── PredateurBoidSystem.java
 │   └── LaLoi.java
 ├── events/
 │   ├── Event.java
@@ -98,7 +98,7 @@ multi_agents/
 │   └── BoidmàjEvent.java
 ├── sim/
 │   ├── AbstractSimulator.java
-│   ├── BoidSimulator.java
+│   ├── BoidSimulateur.java
 │   └── RotatedImageElement.java
 └── tests/
     ├── TestEventManager.java

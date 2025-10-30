@@ -1,7 +1,7 @@
 package multi_agents.EvenT;
 
 import multi_agents.logic.BoidSystem;
-import multi_agents.simulation.BoidSimulator;
+import multi_agents.simulation.BoidSimulateur;
 
 /**
  * Événement qui représente la mise à jour d'un système de boids.
@@ -10,7 +10,7 @@ import multi_agents.simulation.BoidSimulator;
  */
 public class BoidmàjEvent extends Event {
     private BoidSystem system;
-    private BoidSimulator simulator;
+    private BoidSimulateur simulator;
     private long delay;
 
     /**
@@ -20,7 +20,7 @@ public class BoidmàjEvent extends Event {
      * @param simulator le simulateur qui gère l'affichage
      * @param delay le délai avant la prochaine mise à jour (fréquence de rafraîchissement)
      */
-    public BoidmàjEvent(long date, BoidSystem system, BoidSimulator simulator, long delay) {
+    public BoidmàjEvent(long date, BoidSystem system, BoidSimulateur simulator, long delay) {
         super(date);
         this.system = system;
         this.simulator = simulator;

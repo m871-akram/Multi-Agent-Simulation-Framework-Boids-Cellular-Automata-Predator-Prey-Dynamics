@@ -207,8 +207,8 @@ double angleVision = Math.PI * 0.8;  // Angle de vision (144°)
 
 **Pour modifier la fréquence de mise à jour :**
 ```java
-simulator.addSystem(preySystem, Color.CYAN, 1);  // delay=1 (rapide)
-simulator.addSystem(predatorSystem, Color.RED, 3);  // delay=3 (plus lent)
+simulator.addSystem(proieSystem, Color.CYAN, 1);  // delay=1 (rapide)
+simulator.addSystem(predateurSystem, Color.RED, 3);  // delay=3 (plus lent)
 ```
 
 **Après modification :** Recompiler avec `make` ou `javac`.

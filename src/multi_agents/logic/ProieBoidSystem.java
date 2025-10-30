@@ -8,7 +8,7 @@ import java.util.List;
  * Les proies suivent les trois règles classiques de Reynolds, mais maintenant elles peuvent
  * aussi fuir les prédateurs (détectés via interGroups) et vagabonder quand elles sont seules.
  */
-public class PreyBoidSystem extends BoidSystem {
+public class ProieBoidSystem extends BoidSystem {
     private double fuiteWeight;
     private double VagabondWeight;
 
@@ -26,7 +26,7 @@ public class PreyBoidSystem extends BoidSystem {
      * @param poiDEAlignement l'importance de l'alignement
      * @param poiDESeparation l'importance de la séparation
      */
-    public PreyBoidSystem(int nbBoids, int width, int height,
+    public ProieBoidSystem(int nbBoids, int width, int height,
                           double rayonVision, double distanceSep, double Vmax,
                           double Fmax, double angleVision,
                           double poiDECohesion, double poiDEAlignement, double poiDESeparation) {
@@ -87,14 +87,14 @@ public class PreyBoidSystem extends BoidSystem {
             Vecteur2D fuite = new Vecteur2D(0, 0);
             
             // On parcourt tous les autres systèmes pour détecter les prédateurs
-            // On utilise isPredator() pour éviter instanceof (meilleure conception OO)
+            // On utilise ispredateur() pour éviter instanceof (meilleure conception OO)
             for (BoidSystem sys : interGroups) {
-                if (sys.isPredator()) {
-                    for (Boid predator : sys.getBoids()) {
-                        double dist = boid.position.distance(predator.position);
+                if (sys.ispredateur()) {
+                    for (Boid predateur : sys.getBoids()) {
+                        double dist = boid.position.distance(predateur.position);
                         // Si un prédateur est dans le rayon de détection
                         if (dist < rayonVision * 1.2) {
-                            Vecteur2D fuiteForce = LaLoi.fuite(boid, predator.position, boid.Vmax);
+                            Vecteur2D fuiteForce = LaLoi.fuite(boid, predateur.position, boid.Vmax);
                             fuite = fuite.add(fuiteForce);
                             boid.auGpeur(0.1); // La peur augmente
                         }
@@ -133,7 +133,7 @@ public class PreyBoidSystem extends BoidSystem {
      * @return true car c'est un système de proies
      */
     @Override
-    public boolean isPrey() {
+    public boolean isproie() {
         return true;
     }
     
@@ -142,7 +142,7 @@ public class PreyBoidSystem extends BoidSystem {
      * @return false car c'est un système de proies
      */
     @Override
-    public boolean isPredator() {
+    public boolean ispredateur() {
         return false;
     }
 }

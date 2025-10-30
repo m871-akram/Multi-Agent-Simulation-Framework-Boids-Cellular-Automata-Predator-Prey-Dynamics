@@ -43,8 +43,8 @@ public abstract class BoidSystem {
     
     // Méthodes abstraites (polymorphisme)
     public abstract void step();
-    public abstract boolean isPredator();
-    public abstract boolean isPrey();
+    public abstract boolean ispredateur();
+    public abstract boolean isproie();
     
     // Méthode utilitaire réutilisable (délégation)
     protected void màjBoids(List<Vecteur2D> accelerations) { ... }
@@ -61,7 +61,7 @@ public abstract class BoidSystem {
 #### Problème Initial
 ```java
 // ❌ Mauvaise pratique
-if (sys instanceof PredatorBoidSystem) {
+if (sys instanceof PredateurBoidSystem) {
     // traitement prédateur
 }
 ```
@@ -69,11 +69,11 @@ if (sys instanceof PredatorBoidSystem) {
 #### Solution Polymorphique
 ```java
 // ✅ Bonne conception OO
-public abstract boolean isPredator();
-public abstract boolean isPrey();
+public abstract boolean ispredateur();
+public abstract boolean isproie();
 
 // Utilisation
-if (sys.isPredator()) {
+if (sys.ispredateur()) {
     // traitement prédateur
 }
 ```
@@ -140,7 +140,7 @@ protected List<BoidSystem> interGroups;
 
 **Justification :**
 - **Extensibilité** : n systèmes peuvent interagir (pas limité à 2)
-- **Couplage faible** : pas de référence directe PredatorSystem ↔ PreySystem
+- **Couplage faible** : pas de référence directe predateurSystem ↔ proieSystem
 - **Modularité** : on peut lier/délier dynamiquement
 
 **Utilisation :**

@@ -20,7 +20,7 @@ import java.util.Map;
  * Cette classe unifie la logique de simulation : gestion des événements, rendu graphique,
  * et boutons Next/Restart de l'interface.
  */
-public class BoidSimulator implements Simulable {
+public class BoidSimulateur implements Simulable {
     protected final GUISimulator gui;
     protected final EventManager manager;
     private Map<BoidSystem, Color> systems;
@@ -29,7 +29,7 @@ public class BoidSimulator implements Simulable {
      * Constructeur qui crée un simulateur de boids.
      * @param gui l'interface graphique où on va dessiner les boids
      */
-    public BoidSimulator(GUISimulator gui) {
+    public BoidSimulateur(GUISimulator gui) {
         this.gui = gui;
         this.manager = new EventManager();
         gui.setSimulable(this); // On dit à la GUI que c'est nous le simulateur

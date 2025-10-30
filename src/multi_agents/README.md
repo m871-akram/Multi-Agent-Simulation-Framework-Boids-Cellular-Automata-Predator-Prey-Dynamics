@@ -12,8 +12,8 @@ multi_agents/
 │   ├── Boid.java                 # Agent individuel avec steering behaviors
 │   ├── Vecteur2D.java           # Classe utilitaire pour calculs vectoriels 2D
 │   ├── BoidSystem.java   # Classe abstraite pour systèmes de boids
-│   ├── PreyBoidSystem.java      # Système de proies (fuient les prédateurs)
-│   ├── PredatorBoidSystem.java  # Système de prédateurs (chassent les proies)
+│   ├── ProieBoidSystem.java      # Système de proies (fuient les prédateurs)
+│   ├── PredateurBoidSystem.java  # Système de prédateurs (chassent les proies)
 │   └── LaLoi.java               # Règles de flocking (cohésion, alignement, séparation)
 │
 ├── events/                        # Gestion événementielle de la simulation
@@ -23,7 +23,7 @@ multi_agents/
 │
 ├── sim/                          # Simulateurs et interface graphique
 │   ├── AbstractSimulator.java   # Simulateur abstrait avec GUI et EventManager
-│   ├── BoidSimulator.java       # Simulateur multi-systèmes pour boids
+│   ├── BoidSimulateur.java       # Simulateur multi-systèmes pour boids
 │   └── RotatedImageElement.java # Élément graphique rotatif pour l'affichage
 │
 ├── tests/                        # Programmes de test
@@ -45,10 +45,10 @@ multi_agents/
 ```
 BoidSystem (abstract)
   ├── abstract step()           # Comportement spécifique
-  ├── abstract isPredator()     # Identification du type
-  └── abstract isPrey()
-      ├── PreyBoidSystem        # Implémente fuite des prédateurs
-      └── PredatorBoidSystem    # Implémente chasse des proies
+  ├── abstract ispredateur()     # Identification du type
+  └── abstract isproie()
+      ├── ProieBoidSystem        # Implémente fuite des prédateurs
+      └── PredateurBoidSystem    # Implémente chasse des proies
 ```
 
 **Principes appliqués** :
@@ -83,7 +83,7 @@ AbstractSimulator (abstract)
   ├── GUISimulator gui         # Interface graphique
   ├── EventManager manager     # Gestionnaire d'événements
   └── abstract draw()          # Rendu spécifique
-      └── BoidSimulator         # Gère plusieurs systèmes simultanément
+      └── BoidSimulateur         # Gère plusieurs systèmes simultanément
 ```
 
 **Fonctionnalités** :

@@ -9,8 +9,7 @@ import java.util.List;
  * ils poursuivent activement les proies les plus proches (détectées via interGroups)
  * et peuvent les capturer quand ils sont suffisamment proches.
  */
-public class PredatorBoidSystem extends BoidSystem {
-    private double chaseWeight;
+public class PredateurBoidSystem extends BoidSystem {
 
     /**
      * Constructeur qui crée un système de prédateurs.
@@ -26,16 +25,14 @@ public class PredatorBoidSystem extends BoidSystem {
      * @param poiDECohesion l'importance de la cohésion entre prédateurs
      * @param poiDEAlignement l'importance de l'alignement
      * @param poiDESeparation l'importance de la séparation
-     * @param chaseWeight l'importance de la chasse des proies
      */
-    public PredatorBoidSystem(int nbBoids, int width, int height,
+    public PredateurBoidSystem(int nbBoids, int width, int height,
                                double rayonVision, double distanceSep, double Vmax,
                                double Fmax, double angleVision,
-                               double poiDECohesion, double poiDEAlignement, double poiDESeparation,
-                               double chaseWeight) {
+                               double poiDECohesion, double poiDEAlignement, double poiDESeparation) {
         super(nbBoids, width, height, rayonVision, distanceSep, Vmax, Fmax, angleVision,
               poiDECohesion, poiDEAlignement, poiDESeparation);
-        this.chaseWeight = chaseWeight;
+
     }
 
     /**
@@ -49,16 +46,16 @@ public class PredatorBoidSystem extends BoidSystem {
     @Override
     public void step() {
         List<Vecteur2D> accelerations = new ArrayList<>();
-        List<Boid> preysToCatch = new ArrayList<>(); // Liste des proies à capturer
+        List<Boid> proiesToCatch = new ArrayList<>(); // Liste des proies à capturer
         
-        for (Boid predator : boids) {
+        for (Boid predateur : boids) {
             // Métabolisme : les prédateurs perdent de l'énergie (plus vite que les proies)
-            predator.fatigue(0.5);
+            predateur.fatigue(0.5);
             
             // Les trois règles de flocking entre prédateurs avec champ de vision
-            Vecteur2D cohesion = LaLoi.cohesion(predator, boids, rayonVision, angleVision);
-            Vecteur2D alignment = LaLoi.alignment(predator, boids, rayonVision, angleVision);
-            Vecteur2D separation = LaLoi.separation(predator, boids, distanceSep, angleVision);
+            Vecteur2D cohesion = LaLoi.cohesion(predateur, boids, rayonVision, angleVision);
+            Vecteur2D alignment = LaLoi.alignment(predateur, boids, rayonVision, angleVision);
+            Vecteur2D separation = LaLoi.separation(predateur, boids, distanceSep, angleVision);
 
             // On applique les poids pour régler l'importance de chaque règle
             cohesion = cohesion.mult(poiDECohesion);
@@ -67,36 +64,36 @@ public class PredatorBoidSystem extends BoidSystem {
 
             // Comportement de chasse via interGroups
             Vecteur2D pursue = new Vecteur2D(0, 0);
-            Boid closestPrey = null;
+            Boid closestproie = null;
             double minDist = Double.MAX_VALUE;
             
             // On parcourt tous les autres systèmes pour trouver des proies
-            // On utilise isPrey() pour éviter instanceof (meilleure conception OO)
+            // On utilise isproie() pour éviter instanceof (meilleure conception OO)
             for (BoidSystem sys : interGroups) {
-                if (sys.isPrey()) {
-                    for (Boid prey : sys.getBoids()) {
-                        double dist = predator.position.distance(prey.position);
+                if (sys.isproie()) {
+                    for (Boid proie : sys.getBoids()) {
+                        double dist = predateur.position.distance(proie.position);
                         if (dist < minDist) {
                             minDist = dist;
-                            closestPrey = prey;
+                            closestproie = proie;
                         }
                     }
                 }
             }
             
             // Si une proie est détectée dans le rayon de chasse
-            if (closestPrey != null && minDist < rayonVision * 2) {
+            if (closestproie != null && minDist < rayonVision * 2) {
                 // On poursuit la proie
-                pursue = LaLoi.poursuite(predator, closestPrey.position, predator.Vmax);
+                pursue = LaLoi.poursuite(predateur, closestproie.position, predateur.Vmax);
                 
                 // La faim augmente la motivation à chasser (énergie sur échelle 0-100)
-                double hungerFactor = 1.0 + (100.0 - predator.getenergie()) / 100.0;
-                pursue = pursue.mult(chaseWeight * hungerFactor);
+                double hungerFactor = 1.0 + (100.0 - predateur.getenergie()) / 100.0;
+                pursue = pursue.mult(hungerFactor);
                 
                 // Capture : si le prédateur est très proche, il attrape la proie
                 if (minDist < 10.0) {
-                    preysToCatch.add(closestPrey);
-                    predator.gainenergie(40.0); // Récupération d'énergie importante
+                    proiesToCatch.add(closestproie);
+                    predateur.gainenergie(40.0); // Récupération d'énergie importante
                 }
             }
 
@@ -106,10 +103,10 @@ public class PredatorBoidSystem extends BoidSystem {
         }
         
         // On retire les proies capturées de leurs systèmes
-        for (Boid prey : preysToCatch) {
+        for (Boid proie : proiesToCatch) {
             for (BoidSystem sys : interGroups) {
-                if (sys.isPrey()) {
-                    sys.getBoids().remove(prey);
+                if (sys.isproie()) {
+                    sys.getBoids().remove(proie);
                 }
             }
         }
@@ -118,7 +115,7 @@ public class PredatorBoidSystem extends BoidSystem {
         màjBoids(accelerations);
         
         // Retirer les prédateurs morts (énergie épuisée)
-        boids.removeIf(predator -> !predator.estvivant());
+        boids.removeIf(predateur -> !predateur.estvivant());
     }
     
     /**
@@ -126,7 +123,7 @@ public class PredatorBoidSystem extends BoidSystem {
      * @return true car c'est un système de prédateurs
      */
     @Override
-    public boolean isPredator() {
+    public boolean ispredateur() {
         return true;
     }
     
@@ -135,7 +132,7 @@ public class PredatorBoidSystem extends BoidSystem {
      * @return false car c'est un système de prédateurs
      */
     @Override
-    public boolean isPrey() {
+    public boolean isproie() {
         return false;
     }
 }
