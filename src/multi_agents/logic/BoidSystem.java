@@ -54,13 +54,10 @@ public abstract class BoidSystem {
         this.poiDEAlignement = poiDEAlignement;
         this.poiDESeparation = poiDESeparation;
         this.interGroups = new ArrayList<>();
-
-        // On crée les boids avec des positions aléatoires
         for (int i = 0; i < nbBoids; i++) {
             double x = Math.random() * width;
             double y = Math.random() * height;
             Boid b = new Boid(x, y);
-            // On configure les paramètres de chaque boid
             b.Vmax = Vmax;
             b.Fmax = Fmax;
             boids.add(b);
@@ -68,46 +65,23 @@ public abstract class BoidSystem {
     }
 
     /**
-     * Méthode abstraite qui effectue une étape de simulation.
-     * C'est ici que chaque type de boid va définir son comportement spécifique.
+     * C'est ici que chaque type de boid va définir son comportement spécifique
      */
     public abstract void step();
     
     /**
-     * Indique si ce système est un système de prédateurs.
-     * Permet d'éviter instanceof et respecter le principe du polymorphisme.
+     * Permet d'éviter instanceof et respecter le principe du polymorphisme
      * @return true si ce système représente des prédateurs, false sinon
      */
-    public abstract boolean ispredateur();
+    public abstract boolean estpredateur();
     
     /**
-     * Indique si ce système est un système de proies.
-     * Permet d'éviter instanceof et respecter le principe du polymorphisme.
      * @return true si ce système représente des proies, false sinon
      */
-    public abstract boolean isproie();
+    public abstract boolean estproie();
 
     /**
-     * Réinitialise tout le système en replaçant les boids aléatoirement.
-     * Utile quand on clique sur le bouton "Restart" de l'interface.
-     * @param gui le simulateur graphique (pour récupérer les dimensions si besoin)
-     */
-    public void reInit(GUISimulator gui) {
-        int nbBoids = boids.size();
-        boids.clear();
-        for (int i = 0; i < nbBoids; i++) {
-            double x = Math.random() * width;
-            double y = Math.random() * height;
-            Boid b = new Boid(x, y);
-            b.Vmax = Vmax;
-            b.Fmax = Fmax;
-            boids.add(b);
-        }
-    }
-
-    /**
-     * Réinitialise le système en recréant un nombre spécifique de boids.
-     * Pratique si on veut changer le nombre de boids en cours de simulation.
+     * Réinitialise le système en recréant un nombre spécifique de boids
      * @param nbBoids le nouveau nombre de boids à créer
      */
     public void reInit(int nbBoids) {
@@ -123,7 +97,6 @@ public abstract class BoidSystem {
     }
 
     /**
-     * Accesseur qui renvoie la liste de tous les boids du système.
      * @return la liste des boids
      */
     public List<Boid> getBoids() {
@@ -131,45 +104,22 @@ public abstract class BoidSystem {
     }
 
     /**
-     * Renvoie le nombre de boids actuellement dans le système.
      * @return le nombre de boids
      */
     public int size() {
         return boids.size();
     }
-    
+
     /**
-     * Définit les autres systèmes de boids avec lesquels ce système peut interagir.
-     * Utile pour les interactions prédateur-proie.
      * @param others la liste des autres systèmes
      */
     public void setinterGroups(List<BoidSystem> others) {
         this.interGroups = others;
     }
+
     
     /**
-     * Récupère la liste des autres systèmes connus par ce système.
-     * @return la liste des autres systèmes
-     */
-    public List<BoidSystem> getinterGroups() {
-        return interGroups;
-    }
-    
-    /**
-     * Met à jour les dimensions de l'espace de simulation.
-     * Cette méthode permet d'adapter dynamiquement la taille de la simulation
-     * à la taille de la fenêtre GUI, rendant le système responsive.
-     * @param newWidth la nouvelle largeur de l'espace de simulation
-     * @param newHeight la nouvelle hauteur de l'espace de simulation
-     */
-    public void màjDimensions(int newWidth, int newHeight) {
-        this.width = newWidth;
-        this.height = newHeight;
-    }
-    
-    /**
-     * Méthode utilitaire pour mettre à jour tous les boids avec leurs accélérations respectives.
-     * Permet d'éviter la duplication de code dans les sous-classes.
+     * Méthode pour mettre à jour tous les boids avec leurs accélérations respectives
      * @param accelerations liste des vecteurs d'accélération (un par boid)
      */
     protected void màjBoids(List<Vecteur2D> accelerations) {

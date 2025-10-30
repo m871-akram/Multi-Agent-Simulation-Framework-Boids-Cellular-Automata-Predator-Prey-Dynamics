@@ -34,11 +34,6 @@ public class BoidmàjEvent extends Event {
      */
     @Override
     public void execute() {
-        // On met à jour les dimensions du système pour qu'il s'adapte à la taille de la fenêtre
-        system.màjDimensions(
-            simulator.getGui().getPanelWidth(),
-            simulator.getGui().getPanelHeight()
-        );
         system.step(); // On fait avancer le système d'un pas
         simulator.draw(); // On redessine tout à l'écran
         // On se replanifie pour la prochaine fois (date actuelle + delay)

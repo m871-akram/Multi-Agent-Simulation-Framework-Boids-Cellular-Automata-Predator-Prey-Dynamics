@@ -87,9 +87,9 @@ public class ProieBoidSystem extends BoidSystem {
             Vecteur2D fuite = new Vecteur2D(0, 0);
             
             // On parcourt tous les autres systèmes pour détecter les prédateurs
-            // On utilise ispredateur() pour éviter instanceof (meilleure conception OO)
+            // On utilise estpredateur() pour éviter instanceof (meilleure conception OO)
             for (BoidSystem sys : interGroups) {
-                if (sys.ispredateur()) {
+                if (sys.estpredateur()) {
                     for (Boid predateur : sys.getBoids()) {
                         double dist = boid.position.distance(predateur.position);
                         // Si un prédateur est dans le rayon de détection
@@ -133,7 +133,7 @@ public class ProieBoidSystem extends BoidSystem {
      * @return true car c'est un système de proies
      */
     @Override
-    public boolean isproie() {
+    public boolean estproie() {
         return true;
     }
     
@@ -142,7 +142,7 @@ public class ProieBoidSystem extends BoidSystem {
      * @return false car c'est un système de proies
      */
     @Override
-    public boolean ispredateur() {
+    public boolean estpredateur() {
         return false;
     }
 }
