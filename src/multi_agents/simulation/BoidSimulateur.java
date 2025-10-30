@@ -13,12 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Simulateur pour les boids, capable de gérer plusieurs systèmes en même temps.
- * Par exemple, on peut avoir un système de proies et un système de prédateurs qui évoluent
- * chacun à leur propre rythme avec leur propre couleur d'affichage.
- * 
- * Cette classe unifie la logique de simulation : gestion des événements, rendu graphique,
- * et boutons Next/Restart de l'interface.
+ * Simulateur pour les boids, capable de gérer plusieurs systèmes en même temps
  */
 public class BoidSimulateur implements Simulable {
     protected final GUISimulator gui;
@@ -38,7 +33,6 @@ public class BoidSimulateur implements Simulable {
     }
 
     /**
-     * Renvoie le gestionnaire d'événements de ce simulateur.
      * @return le gestionnaire d'événements
      */
     public EventManager getManager() {
@@ -46,7 +40,6 @@ public class BoidSimulateur implements Simulable {
     }
 
     /**
-     * Renvoie l'interface graphique (GUI) de ce simulateur.
      * @return l'interface graphique GUISimulator
      */
     public GUISimulator getGui() {
@@ -54,8 +47,7 @@ public class BoidSimulateur implements Simulable {
     }
 
     /**
-     * Ajoute un nouveau système de boids à la simulation.
-     * On peut appeler cette méthode plusieurs fois pour avoir plusieurs groupes.
+     * Ajoute un nouveau système de boids à la simulation
      * @param system le système de boids (proies, prédateurs, etc.)
      * @param color la couleur pour afficher ce groupe
      * @param delay la fréquence de mise à jour (1 = rapide, 3 = plus lent, etc.)
@@ -67,16 +59,16 @@ public class BoidSimulateur implements Simulable {
     }
 
     /**
-     * Dessine tous les boids de tous les systèmes à l'écran.
-     * Chaque boid est représenté par une petite image (loupe) orientée selon sa vitesse.
-     * La couleur est assombrie quand le boid a peu d'énergie (< 30).
-     * Les boids morts ne sont pas affichés.
+     * Dessine tous les boids de tous les systèmes à l'écran
+     * Chaque boid est représenté par une petite image (loupe) orientée selon sa vitesse
+     * La couleur est assombrie quand le boid a peu d'énergie (< 30)
+     * Les boids morts ne sont pas affichés
      */
     public void draw() {
-        gui.reset(); // On efface tout l'écran
+        gui.reset();
         // On parcourt tous les systèmes qu'on a ajoutés
         for (Map.Entry<BoidSystem, Color> entry : systems.entrySet()) {
-            Color baseColor = entry.getValue();
+            Color Color = entry.getValue();
             BoidSystem system = entry.getKey();
 
             // Pour chaque boid du système, on le dessine
@@ -91,13 +83,13 @@ public class BoidSimulateur implements Simulable {
                 double angle = Math.atan2(vitesse.y, vitesse.x);
 
                 // Ajuster la couleur selon l'énergie (assombrir si énergie < 30)
-                Color color = baseColor;
+                Color color = Color;
                 if (b.getenergie() < 30) {
                     float factor = (float) (b.getenergie() / 30.0); // 0.0 à 1.0
                     color = new Color(
-                        (int) (baseColor.getRed() * factor),
-                        (int) (baseColor.getGreen() * factor),
-                        (int) (baseColor.getBlue() * factor)
+                        (int) (Color.getRed() * factor),
+                        (int) (Color.getGreen() * factor),
+                        (int) (Color.getBlue() * factor)
                     );
                 }
 
@@ -106,7 +98,7 @@ public class BoidSimulateur implements Simulable {
                 gui.addGraphicalElement(new RotatedImageElement(
                     (int) position.x,
                     (int) position.y,
-                    "doc/resources/glass.png", // L'image de la loupe
+                    "doc/resources/glass.png", // L'image de la loupe que je sais pas pourquoi elle est fournie
                     20, // Largeur
                     20, // Hauteur
                     angle, // Angle de rotation
@@ -117,10 +109,9 @@ public class BoidSimulateur implements Simulable {
     }
 
     /**
-     * Lie tous les systèmes entre eux pour permettre les interactions inter-groupes.
+     * Lie tous les systèmes entre eux pour permettre les interactions inter-groupes
      * Chaque système sera conscient de tous les autres systèmes, ce qui permet
-     * aux prédateurs de chasser les proies et aux proies de fuir les prédateurs.
-     * IMPORTANT : Appeler cette méthode après avoir ajouté tous les systèmes !
+     * aux prédateurs de chasser les proies et aux proies de fuir les prédateurs
      */
     public void linkSystems() {
         java.util.List<BoidSystem> allSystems = new java.util.ArrayList<>(systems.keySet());
@@ -134,7 +125,6 @@ public class BoidSimulateur implements Simulable {
     }
 
     /**
-     * Appelée quand on clique sur le bouton "Next" de l'interface.
      * On exécute simplement le prochain événement dans la file.
      */
     @Override
@@ -143,8 +133,6 @@ public class BoidSimulateur implements Simulable {
     }
 
     /**
-     * Réinitialise complètement la simulation : on replace tous les boids au hasard
-     * et on recrée les événements de mise à jour.
      * Appelée quand on clique sur le bouton "Restart" de l'interface.
      */
     @Override

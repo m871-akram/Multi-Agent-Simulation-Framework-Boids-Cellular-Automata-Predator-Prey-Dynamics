@@ -1,6 +1,5 @@
 package multi_agents.logic;
 
-import gui.GUISimulator;
 import java.util.ArrayList;
 import java.util.List;
 

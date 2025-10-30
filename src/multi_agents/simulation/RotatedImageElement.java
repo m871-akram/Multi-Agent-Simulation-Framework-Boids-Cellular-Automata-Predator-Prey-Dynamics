@@ -58,7 +58,7 @@ public class RotatedImageElement implements GraphicalElement {
             // On crée une nouvelle transformation pour la rotation
             AffineTransform transform = new AffineTransform();
             transform.translate(x, y); // On se déplace au centre du boid
-            transform.rotate(angle); // On applique la rotation
+            transform.rotate(angle + Math.toRadians(360-45)); // On applique la rotation + un offset que vous devrez deviner en regardant l image de la loupe
             transform.translate(-width / 2.0, -height / 2.0); // On recentre l'image
 
             // On applique la transformation

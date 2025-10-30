@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Système de boids représentant des proies (par exemple des poissons ou des oiseaux).
+ * Système de boids représentant des proies
  * Les proies suivent les trois règles classiques de Reynolds, mais maintenant elles peuvent
  * aussi fuir les prédateurs (détectés via interGroups) et vagabonder quand elles sont seules.
  */
 public class ProieBoidSystem extends BoidSystem {
-    private double fuiteWeight;
     private double VagabondWeight;
 
     /**
@@ -32,18 +31,14 @@ public class ProieBoidSystem extends BoidSystem {
                           double poiDECohesion, double poiDEAlignement, double poiDESeparation) {
         super(nbBoids, width, height, rayonVision, distanceSep, Vmax, Fmax, angleVision,
               poiDECohesion, poiDEAlignement, poiDESeparation);
-        this.fuiteWeight = 3.0;    // La fuite est très importante pour survivre
         this.VagabondWeight = 0.3;  // Le vagabondage est plus faible
     }
 
     /**
-     * Effectue une étape de simulation pour toutes les proies.
-     * On applique les règles de flocking avec champ de vision, la fuite des prédateurs
-     * (maintenant détectés via interGroups), et le vagabondage si la proie est seule.
-     * 
-     * Les proies perdent de l'énergie au fil du temps (métabolisme).
-     * Si une proie survit assez longtemps et a assez d'énergie, elle se reproduit.
-     * Les proies mortes (énergie épuisée) sont retirées du système.
+     * Effectue une étape de simulation pour toutes les proies
+     * Les proies perdent de l'énergie au fil du temps (métabolisme)
+     * Si une proie survit assez longtemps et a assez d'énergie, elle se reproduit
+     * Les proies mortes (énergie épuisée) sont retirées du système
      */
     @Override
     public void step() {
@@ -53,22 +48,16 @@ public class ProieBoidSystem extends BoidSystem {
         for (Boid boid : boids) {
             // Métabolisme : toutes les proies perdent de l'énergie
             boid.fatigue(0.1);
-            
+
             // Reproduction : si la proie a assez d'énergie et d'âge
-            // et que la chance le permet (2% par frame)
-            if (boid.getenergie() > 80 && boid.getAge() > 50 && Math.random() < 0.02) {
+            // et que la chance de retrouver son amour eternel le permet (7% par frame)
+            if (boid.getenergie() > 80 && boid.getAge() > 50 && Math.random() < 0.07) {
                 // Créer un nouveau boid à proximité
-                double offsetX = (Math.random() - 0.5) * 20;
-                double offsetY = (Math.random() - 0.5) * 20;
-                Boid baby = new Boid(
-                    boid.position.x + offsetX, 
-                    boid.position.y + offsetY
-                );
+                Boid bebe = new Boid((boid.position.x + Math.random() * 10), (boid.position.y + Math.random()  * 10));
                 // Hériter des paramètres du parent
-                baby.Vmax = boid.Vmax;
-                baby.Fmax = boid.Fmax;
-                newBoids.add(baby);
-                
+                bebe.Vmax = boid.Vmax;
+                bebe.Fmax = boid.Fmax;
+                newBoids.add(bebe);
                 // Le parent perd de l'énergie pour la reproduction
                 boid.fatigue(30.0);
             }
@@ -78,7 +67,6 @@ public class ProieBoidSystem extends BoidSystem {
             Vecteur2D alignment = LaLoi.alignment(boid, boids, rayonVision, angleVision);
             Vecteur2D separation = LaLoi.separation(boid, boids, distanceSep, angleVision);
 
-            // On multiplie chaque force par son poids
             cohesion = cohesion.mult(poiDECohesion);
             alignment = alignment.mult(poiDEAlignement);
             separation = separation.mult(poiDESeparation);
@@ -87,24 +75,17 @@ public class ProieBoidSystem extends BoidSystem {
             Vecteur2D fuite = new Vecteur2D(0, 0);
             
             // On parcourt tous les autres systèmes pour détecter les prédateurs
-            // On utilise estpredateur() pour éviter instanceof (meilleure conception OO)
             for (BoidSystem sys : interGroups) {
                 if (sys.estpredateur()) {
                     for (Boid predateur : sys.getBoids()) {
                         double dist = boid.position.distance(predateur.position);
                         // Si un prédateur est dans le rayon de détection
-                        if (dist < rayonVision * 1.2) {
+                        if (dist < rayonVision ) {
                             Vecteur2D fuiteForce = LaLoi.fuite(boid, predateur.position, boid.Vmax);
                             fuite = fuite.add(fuiteForce);
-                            boid.auGpeur(0.1); // La peur augmente
                         }
                     }
                 }
-            }
-            
-            // La peur amplifie la force de fuite
-            if (fuite.norm() > 0) {
-                fuite = fuite.mult(fuiteWeight * (1.0 + boid.getpeur()));
             }
 
             // Comportement de vagabondage si pas de voisins (exploration)
@@ -112,7 +93,6 @@ public class ProieBoidSystem extends BoidSystem {
             if (cohesion.norm() < 0.01) { // Si pas de cohésion, le boid est seul
                 Vagabond = LaLoi.Vagabond(boid, VagabondWeight);
             }
-
             // On combine toutes les forces
             Vecteur2D acc = cohesion.add(alignment).add(separation).add(fuite).add(Vagabond);
             accelerations.add(acc);
@@ -129,7 +109,6 @@ public class ProieBoidSystem extends BoidSystem {
     }
     
     /**
-     * Indique que ce système représente des proies.
      * @return true car c'est un système de proies
      */
     @Override
@@ -138,7 +117,6 @@ public class ProieBoidSystem extends BoidSystem {
     }
     
     /**
-     * Indique que ce système ne représente pas des prédateurs.
      * @return false car c'est un système de proies
      */
     @Override

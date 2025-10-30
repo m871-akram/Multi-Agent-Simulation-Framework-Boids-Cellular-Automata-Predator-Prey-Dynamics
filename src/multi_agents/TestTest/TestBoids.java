@@ -20,8 +20,8 @@ public class TestBoids {
 
         // On définit les paramètres de la simulation
         int nbBoids = 50; 
-        int width = gui.getPanelWidth();
-        int height = gui.getPanelHeight();
+        int width = 800;
+        int height = 600;
         double rayonVision = 100.0; 
         double distanceSep = 30.0; 
         double Vmax = 3.0; 

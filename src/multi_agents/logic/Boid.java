@@ -12,7 +12,7 @@ public class Boid {
     
     /** Vecteur accélération */
     private Vecteur2D acceleration;
-    
+
     /** Vitesse maximale autorisée  */
     double Vmax;
     
@@ -21,9 +21,6 @@ public class Boid {
     
     /** Énergie du boid (diminue avec le temps, augmente en mangeant) - privée pour garantir l'intégrité */
     private double energie;
-    
-    /** Niveau de peur (augmente si des prédateurs sont proches) */
-    private double peur;
     
     /** Âge du boid en nombre de frame */
     private int age;
@@ -44,7 +41,6 @@ public class Boid {
         this.Vmax = 3.0;
         this.Fmax = 0.1;
         this.energie = 100.0;  // Énergie maximale au départ
-        this.peur = 0.0;
         this.age = 0;
         this.vivant = true;
     }
@@ -90,7 +86,6 @@ public class Boid {
         
         // Mise à jour des états internes
         age++;  // Le boid vieillit
-        peur = Math.max(0, peur - 0.05);  // La peur diminue si pas de menace
     }
     
     /**
@@ -114,16 +109,7 @@ public class Boid {
     public void gainenergie(double mana) {
         this.energie = Math.min(100.0, this.energie + mana);
     }
-    
-    /**
-     * Augmente la peur du boid (prédateur est proche)
-     * @param antiaura la quantité de peur à ajouter
-     */
-    public void auGpeur(double antiaura) {
-        this.peur = Math.min(1.0, this.peur + antiaura);
-    }
-    
-    
+
     /**
      * Renvoie la position actuelle du boid
      * @return la position du boid
@@ -147,10 +133,10 @@ public class Boid {
     public double getVmax() {
         return Vmax;
     }
-    
+
     /**
      * Définit la vitesse maximale du boid
-     * @param Vmax la nouvelle vitesse maximale 
+     * @param Vmax la nouvelle vitesse maximale
      * @throws IllegalArgumentException si Vmax est négative
      */
     public void setVmax(double Vmax) {
@@ -162,19 +148,12 @@ public class Boid {
 
     /**
      * Renvoie le niveau d'énergie actuel du boid
-     * @return l'énergie 
+     * @return l'énergie
      */
     public double getenergie() {
         return energie;
     }
-    
-    /**
-     * Renvoie le niveau de peur actuel du boid
-     * @return la peur 
-     */
-    public double getpeur() {
-        return peur;
-    }
+
     
     /**
      * Renvoie l'âge du boid en frames
