@@ -1,8 +1,8 @@
 # JAVA_POO — Simulations GUI + Multi-Agents (Boids)
 
 Ce dépôt regroupe:
-- un squelette pédagogique POO 2A avec une GUI fournie (`lib/gui.jar`) et des démos simples (ex: `src/TestInvader.java`),
-- un projet complet de simulation multi-agents (boids) avec interactions proies/prédateurs et un écosystème dynamique (énergie, vieillissement, reproduction, mort).
+- un squelette pédagogique POO  avec une GUI fournie (`lib/gui.jar`) et des démos simples (ex: `src/TestInvader.java`),
+- un projet  de simulation multi-agents (boids) avec interactions proies/prédateurs et un écosystème dynamique (énergie, vieillissement, reproduction, mort).
 
 Documentation complète: voir `CONCEPTION.md` (conception et règles), `ARCHITECTURE.md` (diagrammes & flux), et la doc GUI (`doc/index.html`).
 
@@ -56,46 +56,10 @@ java -classpath bin;lib/gui.jar multi_agents.TestTest.TestEcosystem
 - `TestMultiGroupBoids` (proies + prédateurs)
 - `TestEcosystem` (dynamique de populations façon Lotka–Volterra)
 
-## Organisation du code
-
-```text
-src/multi_agents/
-    logic/      # Boid, ProieBoidSystem, PredateurBoidSystem, Vecteur2D, LaLoi, BoidSystem
-    EvenT/      # Event, EventManager, BoidmàjEvent
-    simulation/ # BoidSimulateur, RotatedImageElement
-    TestTest/   # TestBoids, TestMultiGroupBoids, TestEcosystem
-```
-
-Correspondance noms (docs ↔ code actuel):
-
-- AbstractBoidSystem → BoidSystem
-- PreyBoidSystem → ProieBoidSystem
-- PredatorBoidSystem → PredateurBoidSystem
-- BoidSimulator → BoidSimulateur
-- BoidUpdateEvent → BoidmàjEvent
 
 ## GUI fournie (cours POO)
 
 La librairie graphique `lib/gui.jar` (doc: `doc/index.html`) permet de créer une fenêtre (`GUISimulator`), dessiner (`addGraphicalElement`) et brancher un simulateur (`Simulable`).
-
-### Compilation & exécution (démo de base)
-
-```bash
-javac -d bin -classpath lib/gui.jar src/TestInvader.java
-java -classpath bin:lib/gui.jar TestInvader
-```
-
-### Automates cellulaires et balles rebondissantes
-
-```bash
-# Conway (Jeu de la vie)
-javac -d bin -classpath lib/gui.jar src/LKhalaya/*.java
-java -classpath bin:lib/gui.jar LKhalaya.TestConway
-
-# Bouncing balls
-javac -d bin -classpath lib/gui.jar src/Koora/*.java
-java -classpath bin:lib/gui.jar Koora.TestBallsSimulator
-```
 
 ## Conseils IDE
 
@@ -108,10 +72,7 @@ java -classpath bin:lib/gui.jar Koora.TestBallsSimulator
 
 - Ouvrez le dossier et installez les extensions Java
 - Si la lib n’est pas détectée, configurez un projet Java et ajoutez `lib/gui.jar`
-
-## FAQ (cours)
-
-- Grilles (Jeu de la vie, Immigration, Schelling): utilisez des voisinages circulaires (tore) pour le calcul des voisines
+- 
 
 ## Dépannage
 
