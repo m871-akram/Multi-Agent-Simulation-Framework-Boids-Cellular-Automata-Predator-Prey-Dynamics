@@ -30,3 +30,40 @@ runTestInvader: compileTestInvader
 clean:
 	rm -rf bin/
 
+# ========= Multi-Agents (src/multi_agents) convenience targets =========
+# These wrappers let you run the multi-agents Makefile from the repo root.
+# They delegate to the Makefile that lives in src/multi_agents/ without
+# duplicating compile/run logic.
+
+.PHONY: run-ecosystem run-multi run-events run-boids multi_agents-compile multi_agents-clean multi_agents-help
+
+MA_DIR := src/multi_agents
+
+# Compile all multi_agents sources
+multi_agents-compile:
+	$(MAKE) -C $(MA_DIR) compile
+
+# Simple boids demo (proies)
+run-boids:
+	$(MAKE) -C $(MA_DIR) run
+
+# Predators vs prey demo
+run-multi:
+	$(MAKE) -C $(MA_DIR) run-multi
+
+# Event manager demo
+run-events:
+	$(MAKE) -C $(MA_DIR) run-events
+
+# Dynamic ecosystem (Lotka-Volterra-like)
+run-ecosystem:
+	$(MAKE) -C $(MA_DIR) run-ecosystem
+
+# Clean multi_agents compiled classes only
+multi_agents-clean:
+	$(MAKE) -C $(MA_DIR) clean
+
+# Show help for multi_agents targets
+multi_agents-help:
+	$(MAKE) -C $(MA_DIR) help
+

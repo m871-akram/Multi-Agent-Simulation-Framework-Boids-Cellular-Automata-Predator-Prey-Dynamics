@@ -1,32 +1,122 @@
-# TPL 2A POO
+# JAVA_POO — Simulations GUI + Multi-Agents (Boids)
 
-Les ressources distribuées contiennent:
+Ce dépôt regroupe:
+- un squelette pédagogique POO 2A avec une GUI fournie (`lib/gui.jar`) et des démos simples (ex: `src/TestInvader.java`),
+- un projet complet de simulation multi-agents (boids) avec interactions proies/prédateurs et un écosystème dynamique (énergie, vieillissement, reproduction, mort).
 
-- une librairie d'affichage graphique d'un simulateur (lib/gui.jar) et sa documentation (doc/index.html)
-- un fichier de démonstration du simulateur (src/TestInvader.java)
+Documentation complète: voir `CONCEPTION.md` (conception et règles), `ARCHITECTURE.md` (diagrammes & flux), et la doc GUI (`doc/index.html`).
 
+## Lancer rapidement
 
-## Compilation & exécution
-### Avec un makefile?
-Un fichier Makefile est distribué pour facilement compiler et exécuter le fichier TestInvader.java
+Prérequis: JDK 8+.
 
-Mais vu la taille de ce projet, il est ***très fortement recommandé d'utiliser un IDE*** pour compiler, exécuter et déboguer votre code!
+macOS/Linux utilisent `:` dans le classpath; Windows utilise `;`.
 
-### IDE Idea Intellij
-- créer un nouveau projet:
-    - menu *File/New Project*
-    - si le répertoire distribué est dans "~/Ensimag/2A/POO/TPL_2A_POO", alors paramétrer les champs *Name* avec "TPL_2A_POO" et *Location* avec "~/Ensimag/2A/POO/"
-    - configurer l'utilisation de la librairie
-    - menu *File/Project Structure* puis *Projet setting/Modules*
-    - clicker sur(*Add* puis "JARs & Directories" et sélectionner ~/Ensimag/2A/POO/TPL_2A_POO/lib
-    - vous pouvez bien sûr utiliser git via l'interface d'idea Intellij
+Exécuter les démos multi-agents depuis la racine (wrappers Makefile):
 
-### IDE VS Code
-- dans "~/Ensimag/2A/POO/TPL_2A_POO", lancer *code ."
-- si vous avez installé les bonnes extensions java (exécution, debogage...) il est possible que tout fonctionne sans rien faire de spécial.
-- s'il ne trouve pas la librairie, vous devez alors créer un vrai "projet" et configurer l'import du .jar.
-- pas vraiment d'aide pour ça, vous trouverez
-- vous pouvez bien sûr utiliser git via l'interface de VS code
+```bash
+make run-boids       # proies (flocking seul)
+make run-multi       # prédateurs vs proies (chasse/fuite, capture)
+make run-ecosystem   # écosystème dynamique (énergie, repro, mort)
+make run-events      # démonstration EventManager
+```
 
-### FAQ (étudiants ou non)
-- Q1) Pour le jeu de la vie, il est indiqué que la grille est circulaire. En revanche, aucune indication n'est donnée pour le jeu de l'immigration ni pour le jeu de Schelling. Faut-il également adopter une grille circulaire ? R1) Oui. Pour le calcul des voisinages, toutes les grilles sont considérées comme circulaires. 
+Ou via le Makefile du dossier `src/multi_agents`:
+
+```bash
+cd src/multi_agents
+make              # compile
+make run          # proies (flocking seul)
+make run-multi    # prédateurs vs proies (chasse/fuite, capture)
+make run-ecosystem# écosystème dynamique (énergie, repro, mort)
+```
+
+Exécution directe (sans make):
+
+```bash
+# Depuis la racine du dépôt
+javac -d bin -classpath lib/gui.jar src/multi_agents/logic/*.java src/multi_agents/EvenT/*.java src/multi_agents/simulation/*.java src/multi_agents/TestTest/*.java
+java -classpath bin:lib/gui.jar multi_agents.TestTest.TestEcosystem
+
+# Sous Windows, utilisez ; au lieu de :
+java -classpath bin;lib/gui.jar multi_agents.TestTest.TestEcosystem
+```
+
+## Points clés (multi-agents)
+
+- Boids (flocking de Craig Reynolds): cohésion, alignement, séparation
+- Interactions multi-groupes: proies fuient, prédateurs chassent et capturent
+- Écosystème dynamique: énergie, vieillissement, reproduction des proies, mort par famine
+- Affichage: sprites orientés, couleur assombrie si énergie faible, boids morts non dessinés
+- Espace de simulation adaptatif: rebond sur les bords et dimensions synchronisées avec la taille du panel GUI
+
+### Tests inclus
+
+- `TestBoids` (proies seules)
+- `TestMultiGroupBoids` (proies + prédateurs)
+- `TestEcosystem` (dynamique de populations façon Lotka–Volterra)
+
+## Organisation du code
+
+```text
+src/multi_agents/
+    logic/      # Boid, ProieBoidSystem, PredateurBoidSystem, Vecteur2D, LaLoi, BoidSystem
+    EvenT/      # Event, EventManager, BoidmàjEvent
+    simulation/ # BoidSimulateur, RotatedImageElement
+    TestTest/   # TestBoids, TestMultiGroupBoids, TestEcosystem
+```
+
+Correspondance noms (docs ↔ code actuel):
+
+- AbstractBoidSystem → BoidSystem
+- PreyBoidSystem → ProieBoidSystem
+- PredatorBoidSystem → PredateurBoidSystem
+- BoidSimulator → BoidSimulateur
+- BoidUpdateEvent → BoidmàjEvent
+
+## GUI fournie (cours POO)
+
+La librairie graphique `lib/gui.jar` (doc: `doc/index.html`) permet de créer une fenêtre (`GUISimulator`), dessiner (`addGraphicalElement`) et brancher un simulateur (`Simulable`).
+
+### Compilation & exécution (démo de base)
+
+```bash
+javac -d bin -classpath lib/gui.jar src/TestInvader.java
+java -classpath bin:lib/gui.jar TestInvader
+```
+
+### Automates cellulaires et balles rebondissantes
+
+```bash
+# Conway (Jeu de la vie)
+javac -d bin -classpath lib/gui.jar src/LKhalaya/*.java
+java -classpath bin:lib/gui.jar LKhalaya.TestConway
+
+# Bouncing balls
+javac -d bin -classpath lib/gui.jar src/Koora/*.java
+java -classpath bin:lib/gui.jar Koora.TestBallsSimulator
+```
+
+## Conseils IDE
+
+### IntelliJ IDEA
+
+- File > New Project
+- Ajoutez `lib/gui.jar` via File > Project Structure > Modules > Dependencies (JARs & Directories)
+
+### VS Code
+
+- Ouvrez le dossier et installez les extensions Java
+- Si la lib n’est pas détectée, configurez un projet Java et ajoutez `lib/gui.jar`
+
+## FAQ (cours)
+
+- Grilles (Jeu de la vie, Immigration, Schelling): utilisez des voisinages circulaires (tore) pour le calcul des voisines
+
+## Dépannage
+
+- Fenêtre vide: vérifier `gui.setSimulable(this)` et que `draw()` est appelé dans `next()/restart()`
+- Classpath: lancez les commandes depuis la racine et incluez `lib/gui.jar` (Windows: `;`)
+- Interactions manquantes: appelez `linkSystems()` après tous les `addSystem()`
+- Ressources: `RotatedImageElement` utilise `doc/resources/glass.png` par défaut; fallback en cercle si l’image manque
+ 
