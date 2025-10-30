@@ -11,15 +11,15 @@ multi_agents/
 ├── core/                          # Classes principales du modèle
 │   ├── Boid.java                 # Agent individuel avec steering behaviors
 │   ├── Vecteur2D.java           # Classe utilitaire pour calculs vectoriels 2D
-│   ├── AbstractBoidSystem.java   # Classe abstraite pour systèmes de boids
+│   ├── BoidSystem.java   # Classe abstraite pour systèmes de boids
 │   ├── PreyBoidSystem.java      # Système de proies (fuient les prédateurs)
 │   ├── PredatorBoidSystem.java  # Système de prédateurs (chassent les proies)
-│   └── Rules.java               # Règles de flocking (cohésion, alignement, séparation)
+│   └── LaLoi.java               # Règles de flocking (cohésion, alignement, séparation)
 │
 ├── events/                        # Gestion événementielle de la simulation
 │   ├── Event.java               # Classe abstraite pour événements
 │   ├── EventManager.java        # Gestionnaire de file d'événements (date-driven)
-│   └── BoidUpdateEvent.java     # Événement de mise à jour d'un système de boids
+│   └── BoidmàjEvent.java     # Événement de mise à jour d'un système de boids
 │
 ├── sim/                          # Simulateurs et interface graphique
 │   ├── AbstractSimulator.java   # Simulateur abstrait avec GUI et EventManager
@@ -43,7 +43,7 @@ multi_agents/
 
 #### Hiérarchie des Systèmes
 ```
-AbstractBoidSystem (abstract)
+BoidSystem (abstract)
   ├── abstract step()           # Comportement spécifique
   ├── abstract isPredator()     # Identification du type
   └── abstract isPrey()
@@ -55,12 +55,12 @@ AbstractBoidSystem (abstract)
 - **Encapsulation** : Attributs privés/package-protected avec getters/setters
 - **Héritage** : Factorisation du code commun (width, height, boids, etc.)
 - **Polymorphisme** : Méthodes abstraites évitant `instanceof`
-- **Délégation** : Méthode `updateBoids()` réutilisable
+- **Délégation** : Méthode `màjBoids()` réutilisable
 
 #### Boid (Agent Individuel)
 Chaque boid possède :
 - **État physique** : position, vitesse, accélération
-- **Paramètres** : maxSpeed, maxForce (steering behaviors)
+- **Paramètres** : Vmax, Fmax (steering behaviors)
 - **État interne** : énergie (diminue avec le temps), peur (augmente face aux prédateurs)
 
 ### 2. **Gestion Événementielle** (`events/`)
@@ -73,7 +73,7 @@ Architecture date-driven utilisant une **file de priorité** :
 ```
 EventManager
   └── PriorityQueue<Event>
-        └── BoidUpdateEvent (se replanifie automatiquement)
+        └── BoidmàjEvent (se replanifie automatiquement)
 ```
 
 ### 3. **Simulateurs** (`sim/`)
@@ -105,17 +105,51 @@ AbstractSimulator (abstract)
    - Angle de vision configurable
    - Les boids ne réagissent qu'aux voisins visibles
 
-3. **Seek & Flee**
-   - Seek : poursuite d'une cible (prédateurs)
-   - Flee : fuite d'une menace (proies)
+3. **poursuite & fuite**
+   - poursuite : poursuite d'une cible (prédateurs)
+   - fuite : fuite d'une menace (proies)
 
-4. **Wander** (Vagabondage)
+4. **Vagabond** (Vagabondage)
    - Exploration quand un boid est seul
    - Comportement aléatoire naturel
 
-5. **États Émergents**
+### États Émergents
    - Énergie : diminue avec le temps, augmente en chassant
    - Peur : influence l'intensité de la fuite
+
+### Écosystème Dynamique (NEW!)
+
+Un système complet de vie et mort simulant les dynamiques Lotka-Volterra :
+
+1. **Métabolisme**
+   - Proies : perte d'énergie de 0.1/frame
+   - Prédateurs : perte d'énergie de 0.5/frame (plus gourmands)
+
+2. **Reproduction (Proies)**
+   - Conditions : énergie > 80, âge > 50 frames
+   - Probabilité : 2% par frame
+   - Coût : -30 énergie pour le parent
+   - Effet : nouveau boid à proximité du parent
+
+3. **Chasse (Prédateurs)**
+   - Gain : +40 énergie en mangeant une proie
+   - Distance de capture : < 10 pixels
+
+4. **Mort**
+   - Quand l'énergie atteint 0, le boid meurt
+   - Les boids morts sont retirés de la simulation
+
+5. **Oscillations de Population**
+   - Beaucoup de proies → beaucoup de prédateurs
+   - Beaucoup de prédateurs → peu de proies (surpâturage)
+   - Peu de proies → peu de prédateurs (famine)
+   - Peu de prédateurs → beaucoup de proies (récupération)
+   - Le cycle recommence !
+
+6. **Indicateurs Visuels**
+   - Couleur normale : énergie > 30
+   - Couleur sombre : énergie < 30 (affamé)
+   - Les boids morts ne sont plus affichés
 
 ### Interactions Multi-Groupes
 
@@ -142,6 +176,7 @@ make
 ```bash
 make run           # Test simple (proies seulement)
 make run-multi     # Test avancé (prédateurs vs proies)
+make run-ecosystem # Écosystème dynamique avec reproduction et mort ⭐
 ```
 
 ## Tests Disponibles
@@ -149,6 +184,11 @@ make run-multi     # Test avancé (prédateurs vs proies)
 1. **TestEventManager** : Validation du système d'événements
 2. **TestBoids** : 50 proies avec flocking classique
 3. **TestMultiGroupBoids** : 60 proies + 8 prédateurs avec capture
+4. **TestEcosystem** ⭐ : Écosystème dynamique avec reproduction, énergie, et mort
+   - 30 proies (bleues)
+   - 10 prédateurs (rouges)
+   - Population oscillante (modèle Lotka-Volterra)
+   - Indicateurs visuels d'énergie
 
 ## Dépendances
 

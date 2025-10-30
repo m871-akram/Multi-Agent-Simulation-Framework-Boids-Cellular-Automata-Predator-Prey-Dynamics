@@ -66,9 +66,9 @@ make
 **macOS/Linux :**
 ```bash
 cd /chemin/vers/JAVA_POO
-javac -d bin -classpath lib/gui.jar src/multi_agents/core/*.java \
-      src/multi_agents/events/*.java src/multi_agents/sim/*.java \
-      src/multi_agents/tests/*.java
+javac -d bin -classpath lib/gui.jar src/multi_agents/logic/*.java \
+      src/multi_agents/EvenT/*.java src/multi_agents/simulation/*.java \
+      src/multi_agents/TestTest/*.java
 ```
 
 **Windows :**
@@ -96,12 +96,12 @@ make run
 
 **Commande manuelle (macOS/Linux) :**
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
 ```
 
 **Commande manuelle (Windows) :**
 ```cmd
-java -classpath bin;lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin;lib/gui.jar multi_agents.TestTest.TestBoids
 ```
 
 ### 4.2 Test Avancé : Prédateurs vs Proies
@@ -115,12 +115,12 @@ make run-multi
 
 **Commande manuelle (macOS/Linux) :**
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 ```
 
 **Commande manuelle (Windows) :**
 ```cmd
-java -classpath bin;lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin;lib/gui.jar multi_agents.TestTest.TestMultiGroupBoids
 ```
 
 ### 4.3 Test du Gestionnaire d'Événements
@@ -129,7 +129,7 @@ Test unitaire qui valide le système événementiel.
 
 **Avec Makefile :**
 ```bash
-make run-events
+make run-EvenT
 ```
 
 ---
@@ -202,7 +202,7 @@ int nbBoids = 50;  // Changer cette valeur
 double rayonVision = 100.0;      // Distance de détection des voisins
 double distanceSep = 30.0;       // Distance minimale entre boids
 double Vmax = 3.0;               // Vitesse maximale
-double fieldOfView = Math.PI * 0.8;  // Angle de vision (144°)
+double angleVision = Math.PI * 0.8;  // Angle de vision (144°)
 ```
 
 **Pour modifier la fréquence de mise à jour :**

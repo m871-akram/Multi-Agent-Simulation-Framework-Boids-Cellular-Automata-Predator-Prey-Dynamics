@@ -88,14 +88,14 @@ multi_agents/
 ├── core/
 │   ├── Boid.java
 │   ├── Vecteur2D.java
-│   ├── AbstractBoidSystem.java
+│   ├── BoidSystem.java
 │   ├── PreyBoidSystem.java
 │   ├── PredatorBoidSystem.java
-│   └── Rules.java
+│   └── LaLoi.java
 ├── events/
 │   ├── Event.java
 │   ├── EventManager.java
-│   └── BoidUpdateEvent.java
+│   └── BoidmàjEvent.java
 ├── sim/
 │   ├── AbstractSimulator.java
 │   ├── BoidSimulator.java
@@ -122,7 +122,7 @@ ls -la README.md CONCEPTION.md MANUEL_UTILISATEUR.md Makefile
 # 3. Test de toutes les cibles Makefile
 make help
 make run
-make run-events
+make run-EvenT
 make clean
 ```
 

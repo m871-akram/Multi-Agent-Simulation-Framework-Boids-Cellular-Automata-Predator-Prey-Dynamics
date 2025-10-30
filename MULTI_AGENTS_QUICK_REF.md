@@ -3,12 +3,12 @@
 ## Class Hierarchy
 
 ```
-multi_agents.events
+multi_agents.EvenT
 ├── Event (abstract)
 │   └── BoidUpdateEvent
 └── EventManager
 
-multi_agents.core
+multi_agents.logic
 ├── Vecteur2D
 ├── Boid
 ├── AbstractBoidSystem (abstract)
@@ -16,12 +16,12 @@ multi_agents.core
 │   └── PredatorBoidSystem
 └── Rules (static utilities)
 
-multi_agents.sim
+multi_agents.simulation
 ├── AbstractSimulator (abstract, implements Simulable)
 │   └── BoidSimulator
 └── RotatedImageElement (implements GraphicalElement)
 
-multi_agents.tests
+multi_agents.TestTest
 ├── TestEventManager
 ├── TestBoids
 └── TestMultiGroupBoids
@@ -144,7 +144,7 @@ sim.draw();
 
 ### Custom Rule Example
 ```java
-// In Rules.java
+// In LaLoi.java
 public static Vecteur2D windForce(Boid b, Vecteur2D windDirection) {
     return windDirection.normalize().mult(0.5);
 }

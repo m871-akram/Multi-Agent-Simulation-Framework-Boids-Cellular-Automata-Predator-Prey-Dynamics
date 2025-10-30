@@ -202,10 +202,10 @@ javac -d bin -classpath lib/gui.jar:bin src/multi_agents/**/*.java
 ### Exécution
 ```bash
 # Groupe unique de proies
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
 
 # Prédateurs vs Proies (recommandé)
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 ```
 
 ## 📚 Références

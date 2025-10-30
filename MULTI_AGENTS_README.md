@@ -8,7 +8,7 @@ This is a modular, event-driven multi-agent simulation framework built using abs
 
 The system is organized into four main packages:
 
-### 1. `multi_agents.core` - Core Agent Logic
+### 1. `multi_agents.logic` - Core Agent Logic
 
 **Vecteur2D.java**
 - 2D vector mathematics
@@ -53,7 +53,7 @@ The system is organized into four main packages:
   - `seek(boid, target, radius)` → attraction to target
   - `flee(boid, threat, radius)` → repulsion from threat
 
-### 2. `multi_agents.events` - Event System
+### 2. `multi_agents.EvenT` - Event System
 
 **Event.java**
 - Abstract base class for all events
@@ -76,7 +76,7 @@ The system is organized into four main packages:
   - `simulator`: the BoidSimulator for drawing
   - `delay`: time until next update
 
-### 3. `multi_agents.sim` - Simulation & Display
+### 3. `multi_agents.simulation` - Simulation & Display
 
 **AbstractSimulator.java** ✨
 - Abstract base class unifying all simulators
@@ -100,7 +100,7 @@ The system is organized into four main packages:
 - Includes image caching for performance
 - Fallback to colored circle if image not found
 
-### 4. `multi_agents.tests` - Test Programs
+### 4. `multi_agents.TestTest` - Test Programs
 
 **TestEventManager.java**
 - Simple PING/PONG message test
@@ -142,27 +142,27 @@ The system is organized into four main packages:
 ### Compile all classes:
 ```bash
 javac -d bin -classpath lib/gui.jar:bin \
-  src/multi_agents/events/*.java \
-  src/multi_agents/core/*.java \
-  src/multi_agents/sim/*.java \
-  src/multi_agents/tests/*.java
+  src/multi_agents/EvenT/*.java \
+  src/multi_agents/logic/*.java \
+  src/multi_agents/simulation/*.java \
+  src/multi_agents/TestTest/*.java
 ```
 
 ### Run tests:
 
 **Event Manager Test (console):**
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestEventManager
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestEventManager
 ```
 
 **Single Group Boids (GUI):**
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
 ```
 
 **Multi-Group Boids (GUI):**
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 ```
 
 ## Extension Guide

@@ -1,6 +1,6 @@
 package Koora;
 
-import multi_agents.events.Event;
+import multi_agents.EvenT.Event;
 
 public class BallsUpdateEvent extends Event {
     private Balls balls;

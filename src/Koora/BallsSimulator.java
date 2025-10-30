@@ -6,7 +6,7 @@ import gui.Simulable;
 import java.awt.Color;
 import java.awt.Point;
 
-import multi_agents.events.EventManager;
+import multi_agents.EvenT.EventManager;
 
 /**
  * Relie la classe Balls (logique) à l'interface graphique GUISimulator.

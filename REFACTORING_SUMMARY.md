@@ -122,8 +122,8 @@ Date 20: PING
 ## 🔄 Backward Compatibility
 
 Updated existing code:
-- `Koora/BallsUpdateEvent.java` - Changed import from Multi_Agents to multi_agents.events
-- `Koora/BallsSimulator.java` - Changed import from Multi_Agents to multi_agents.events
+- `Koora/BallsUpdateEvent.java` - Changed import from Multi_Agents to multi_agents.EvenT
+- `Koora/BallsSimulator.java` - Changed import from Multi_Agents to multi_agents.EvenT
 
 Both packages now compile and run successfully.
 
@@ -175,10 +175,10 @@ bin/multi_agents/
 javac -d bin -classpath lib/gui.jar:bin src/multi_agents/**/*.java
 
 # Run single group
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
 
 # Run multi-group
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 ```
 
 ### Or use the script

@@ -218,7 +218,7 @@ User Clicks "Next"
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    multi_agents.tests                    │
+│                    multi_agents.TestTest                    │
 │  • TestEventManager                                     │
 │  • TestBoids                                            │
 │  • TestMultiGroupBoids                                  │

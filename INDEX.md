@@ -13,10 +13,10 @@ Welcome to the multi-agent boid simulation system! This project demonstrates a c
 # Compile everything
 javac -d bin -classpath lib/gui.jar:bin src/multi_agents/**/*.java
 
-# Run tests
-java -classpath bin:lib/gui.jar multi_agents.tests.TestEventManager
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+# Run TestTest
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestEventManager
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 
 # Or use the automated script
 ./build_and_test.sh
@@ -176,7 +176,7 @@ JAVA_POO/
 - **Runtime**: 1 second
 
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestEventManager
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestEventManager
 ```
 
 ### 2. TestBoids (GUI)
@@ -186,7 +186,7 @@ java -classpath bin:lib/gui.jar multi_agents.tests.TestEventManager
 - **Update**: Every step
 
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
 ```
 
 ### 3. TestMultiGroupBoids (GUI)
@@ -196,7 +196,7 @@ java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
 - **Update**: Prey (fast), predators (slow)
 
 ```bash
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 ```
 
 ---

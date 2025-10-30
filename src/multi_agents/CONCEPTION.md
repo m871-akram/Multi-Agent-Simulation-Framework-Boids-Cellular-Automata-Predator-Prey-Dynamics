@@ -28,15 +28,15 @@ Le projet adopte une **architecture en couches** respectant les principes SOLID 
 
 #### Choix : Classe Abstraite vs Interface
 
-**Décision :** Utilisation d'une classe abstraite `AbstractBoidSystem`
+**Décision :** Utilisation d'une classe abstraite `BoidSystem`
 
 **Justification :**
 - **Factorisation importante** : attributs communs (width, height, boids, rayonVision, etc.)
-- **Comportement partagé** : méthode `updateBoids()` identique pour tous
+- **Comportement partagé** : méthode `màjBoids()` identique pour tous
 - **Template Method Pattern** : `step()` abstraite, mais structure commune
 
 ```java
-public abstract class AbstractBoidSystem {
+public abstract class BoidSystem {
     // Attributs factorisés (évite duplication)
     protected List<Boid> boids;
     protected double rayonVision, distanceSep, Vmax;
@@ -47,13 +47,13 @@ public abstract class AbstractBoidSystem {
     public abstract boolean isPrey();
     
     // Méthode utilitaire réutilisable (délégation)
-    protected void updateBoids(List<Vecteur2D> accelerations) { ... }
+    protected void màjBoids(List<Vecteur2D> accelerations) { ... }
 }
 ```
 
 **Avantages :**
 - Évite 200+ lignes de code dupliqué
-- Un seul endroit pour modifier `updateBoids()`
+- Un seul endroit pour modifier `màjBoids()`
 - Respect du principe DRY (Don't Repeat Yourself)
 
 ### 1.3 Élimination d'instanceof
@@ -89,17 +89,17 @@ if (sys.isPredator()) {
 
 | Attribut | Visibilité | Justification |
 |----------|-----------|---------------|
-| `energy`, `fear` | `private` | États sensibles, accès contrôlé |
-| `position`, `vitesse` | package-protected | Performance (accès dans `Rules`), masqué de l'extérieur |
-| `maxSpeed`, `maxForce` | package-protected | Même raison |
+| `energie`, `peur` | `private` | États sensibles, accès contrôlé |
+| `position`, `vitesse` | package-protected | Performance (accès dans `LaLoi`), masqué de l'extérieur |
+| `Vmax`, `Fmax` | package-protected | Même raison |
 
 **Validation dans les Setters :**
 ```java
-public void setMaxSpeed(double maxSpeed) {
-    if (maxSpeed < 0) {
+public void setVmax(double Vmax) {
+    if (Vmax < 0) {
         throw new IllegalArgumentException("Vitesse maximale négative");
     }
-    this.maxSpeed = maxSpeed;
+    this.Vmax = Vmax;
 }
 ```
 
@@ -135,7 +135,7 @@ public class EventManager {
 
 **Décision :**
 ```java
-protected List<AbstractBoidSystem> otherSystems;
+protected List<BoidSystem> interGroups;
 ```
 
 **Justification :**
@@ -160,14 +160,14 @@ simulator.linkSystems();  // Liaison automatique après ajout
 
 | Méthode | Rôle | Justification du Design |
 |---------|------|------------------------|
-| `applyForce(Vecteur2D)` | Accumule forces | Steering behaviors (Nature of Code) |
-| `update(width, height)` | Intègre physique | Euler semi-implicite (vitesse puis position) |
-| `increaseEnergy(double)` | Gère énergie | États émergents, borne [0,1] |
+| `limiterForce(Vecteur2D)` | Accumule forces | Steering behaviors (Nature of Code) |
+| `màj(width, height)` | Intègre physique | Euler semi-implicite (vitesse puis position) |
+| `increaseenergie(double)` | Gère énergie | États émergents, borne [0,1] |
 
 **Choix technique :** Attribut `acceleration` réinitialisé à chaque frame  
 **Raison :** Modèle de forces cumulatives (cohésion + alignement + séparation + ...)
 
-### 2.2 Classe `Rules`
+### 2.2 Classe `LaLoi`
 
 **Responsabilité :** Algorithmes de flocking
 
@@ -176,7 +176,7 @@ simulator.linkSystems();  // Liaison automatique après ajout
 **Justification :**
 - Pas d'état interne (stateless)
 - Réutilisable partout
-- Lisibilité : `Rules.cohesion(...)` vs `new Rules().cohesion(...)`
+- Lisibilité : `LaLoi.cohesion(...)` vs `new LaLoi().cohesion(...)`
 
 **Méthodes avancées :**
 
@@ -184,26 +184,26 @@ simulator.linkSystems();  // Liaison automatique après ajout
 ```java
 Vecteur2D toOther = other.position.sub(b.position).normalize();
 double cosAngle = velocity.dot(toOther);
-if (cosAngle > Math.cos(fieldOfView / 2)) { ... }
+if (cosAngle > Math.cos(angleVision / 2)) { ... }
 ```
 **Justification :** Réalisme biologique, les boids ne voient pas derrière eux
 
-2. **Seek/Flee avec anticipation**
+2. **poursuite/fuite avec anticipation**
 ```java
-Vecteur2D desired = target.sub(b.position).normalize().mult(maxSpeed);
+Vecteur2D desired = target.sub(b.position).normalize().mult(Vmax);
 return desired.sub(b.vitesse);  // steering force
 ```
 **Justification :** Approche Reynolds, mouvement fluide sans téléportation
 
 ### 2.3 Système Événementiel
 
-**`BoidUpdateEvent` auto-replanifiant :**
+**`BoidmàjEvent` auto-replanifiant :**
 ```java
 public void execute() {
-    system.updateDimensions(gui.getPanelWidth(), gui.getPanelHeight());
+    system.màjDimensions(gui.getPanelWidth(), gui.getPanelHeight());
     system.step();
     simulator.draw();
-    manager.addEvent(new BoidUpdateEvent(date + delay, ...)); // ← Auto-replanification
+    manager.addEvent(new BoidmàjEvent(date + delay, ...)); // ← Auto-replanification
 }
 ```
 
@@ -275,7 +275,7 @@ manager.next(); // Doit afficher "Second"
 
 **Test 1 : Vitesse négative**
 ```java
-boid.setMaxSpeed(-1.0);  // Lance IllegalArgumentException
+boid.setVmax(-1.0);  // Lance IllegalArgumentException
 ```
 **Résultat :** ✅ Exception levée avec message clair
 

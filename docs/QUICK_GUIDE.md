@@ -161,10 +161,10 @@ Lancez `TestMultiGroupBoids` et observez :
 javac -d bin -classpath lib/gui.jar:bin src/multi_agents/**/*.java
 
 # Test groupe unique (recommandé pour débuter)
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
 
 # Test prédateur-proie (comportements complets)
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 ```
 
 ## 📈 Ajustement des Paramètres

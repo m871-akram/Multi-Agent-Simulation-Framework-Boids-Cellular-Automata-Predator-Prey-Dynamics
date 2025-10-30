@@ -105,10 +105,10 @@ The implementation successfully creates emergent behaviors:
 javac -d bin -classpath lib/gui.jar:bin src/multi_agents/**/*.java
 
 # Run simple test
-java -classpath bin:lib/gui.jar multi_agents.tests.TestBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestBoids
 
 # Run predator-prey (recommended)
-java -classpath bin:lib/gui.jar multi_agents.tests.TestMultiGroupBoids
+java -classpath bin:lib/gui.jar multi_agents.TestTestest.TestMultiGroupBoids
 ```
 
 ## 🎓 Principles Applied
