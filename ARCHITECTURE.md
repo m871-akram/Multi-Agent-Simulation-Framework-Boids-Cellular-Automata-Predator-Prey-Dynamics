@@ -268,7 +268,7 @@ flowchart TB
     Simulation --> GUI
 ```
 
-## 13) Communication runtime entre packages (résumé)
+## 13) Communication runtime entre packages 
 
 - Initialisation
   - `Test*` crée `GUISimulator`, puis `BoidSimulateur` et un ou plusieurs systèmes (`ProieBoidSystem`, `PredateurBoidSystem`).
