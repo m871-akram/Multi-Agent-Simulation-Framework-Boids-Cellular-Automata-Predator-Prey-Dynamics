@@ -167,15 +167,9 @@ Points d’intégration:
 - Nouveaux champs dans `Boid` (ex: santé) ⇒ répercuter dans le rendu (couleur/alpha) si nécessaire.
 - Règles additionnelles ⇒ implémenter dans `LaLoi` et pondérer dans `step()`.
 
-## 10) Dépannage
 
-- Rien ne bouge: vérifier les événements (Next/Restart), appels `addSystem()` puis `linkSystems()`
-- Les boids sortent de l’écran: vérifier `setBounds()` appelé avant `step()`
-- Pas d’interactions: `linkSystems()` doit être appelé après tous les `addSystem()`
-- Couleurs ternes: c’est l’indicateur d’énergie < 30 (comportement voulu)
-- Pas d’image ou artefacts visuels: `RotatedImageElement` utilise `doc/resources/glass.png` par défaut; en cas d’erreur, un cercle est dessiné à la place.
 
-## 11) Références
+## 10) Références
 
 - Reynolds, C. (1987) — Flocks, herds and schools
 - Shiffman, D. — The Nature of Code, chap. 6
