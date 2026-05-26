@@ -3,8 +3,8 @@ package Koora;
 import multi_agents.EvenT.Event;
 
 public class BallsUpdateEvent extends Event {
-    private Balls balls;
-    private BallsSimulator simulator;
+    private final Balls balls;
+    private final BallsSimulator simulator;
 
     public BallsUpdateEvent(long date, Balls balls, BallsSimulator simulator) {
         super(date);

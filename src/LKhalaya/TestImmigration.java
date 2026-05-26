@@ -2,7 +2,7 @@ package LKhalaya;
 
 import gui.GUISimulator;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class TestImmigration {
     public static void main(String[] args) {

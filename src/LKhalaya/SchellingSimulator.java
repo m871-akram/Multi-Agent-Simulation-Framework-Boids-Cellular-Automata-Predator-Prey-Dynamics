@@ -2,7 +2,8 @@ package LKhalaya;
 
 import gui.GUISimulator;
 import gui.Rectangle;
-import java.awt.Color;
+
+import java.awt.*;
 
 /**
  * Simulateur graphique pour le modèle de Schelling.

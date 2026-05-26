@@ -3,14 +3,14 @@ package LKhalaya;
 import gui.GUISimulator;
 import gui.Rectangle;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Simulateur pour le jeu de l'immigration.
  * Hérite de CellularSimulator et implémente uniquement la logique de dessin.
  */
 public class ImmigrationSimulator extends CellularSimulator {
-    
+
     private final ImmigrationGrid grid;
     private final Color[] palette; // couleurs associées aux états
 
@@ -34,7 +34,7 @@ public class ImmigrationSimulator extends CellularSimulator {
                 int cx = cellHalf + j * step;
                 int cy = cellHalf + i * step;
                 int state = grid.getState(i, j);
-                Color color = palette[state ];
+                Color color = palette[state];
                 gui.addGraphicalElement(new Rectangle(cx, cy, color, color, cellHalf));
             }
         }

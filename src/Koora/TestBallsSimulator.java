@@ -1,8 +1,8 @@
 package Koora;
 
-import java.awt.Color;
 import gui.GUISimulator;
-import java.awt.Point;
+
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,10 +13,10 @@ public class TestBallsSimulator {
 
         // Crée quelques positions initiales
         List<Point> PositionsInit = Arrays.asList(
-                        new Point(100, 100),
-                        new Point(200, 150),
-                        new Point(300, 250)
-                );
+                new Point(100, 100),
+                new Point(200, 150),
+                new Point(300, 250)
+        );
 
         List<Point> Vitesse = Arrays.asList(
                 new Point(5, 4),

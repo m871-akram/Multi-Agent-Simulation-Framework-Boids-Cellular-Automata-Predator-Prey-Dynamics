@@ -2,20 +2,26 @@ package LKhalaya;
 
 import java.util.Random;
 
-/** Modèle du Jeu de la vie de Conway (grille torique). */
+/**
+ * Modèle du Jeu de la vie de Conway (grille torique).
+ */
 public class JeuVie extends CellularGrid {
 
     private final boolean[][] init;     // état initial
     private boolean[][] current;        // état courant
 
-    /** Crée une grille vide (toutes mortes). */
+    /**
+     * Crée une grille vide (toutes mortes).
+     */
     public JeuVie(int rows, int cols) {
         super(rows, cols);
         this.init = new boolean[rows][cols];
         this.current = new boolean[rows][cols];
     }
 
-    /** Initialisation aléatoire avec probabilité 'aliveProb' d'être vivante. */
+    /**
+     * Initialisation aléatoire avec probabilité 'aliveProb' d'être vivante.
+     */
     public void randomInit(double aliveProb, long seed) {
         Random r = new Random(seed);
         for (int i = 0; i < rows; i++) {
@@ -26,7 +32,9 @@ public class JeuVie extends CellularGrid {
         }
     }
 
-    /** Repart de l'état initial. */
+    /**
+     * Repart de l'état initial.
+     */
     @Override
     public void reInit() {
         for (int i = 0; i < rows; i++) {
@@ -34,12 +42,16 @@ public class JeuVie extends CellularGrid {
         }
     }
 
-    /** Accès lecture à l'état courant d'une cellule. */
+    /**
+     * Accès lecture à l'état courant d'une cellule.
+     */
     public boolean isAlive(int i, int j) {
         return current[i][j];
     }
 
-    /** Calcule une génération (règles de Conway) sur une grille TORIQUE. */
+    /**
+     * Calcule une génération (règles de Conway) sur une grille TORIQUE.
+     */
     @Override
     public void step() {
         boolean[][] next = new boolean[rows][cols];
@@ -60,7 +72,9 @@ public class JeuVie extends CellularGrid {
     }
 
 
-    /** Compte les voisines vivantes en considérant la grille comme torique. */
+    /**
+     * Compte les voisines vivantes en considérant la grille comme torique.
+     */
     private int countNeighborsToroidal(int i, int j) {
         int count = 0;
         for (int di = -1; di <= 1; di++) {

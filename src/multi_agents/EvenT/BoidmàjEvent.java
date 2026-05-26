@@ -9,16 +9,17 @@ import multi_agents.simulation.BoidSimulateur;
  * et se replanifie lui-même pour continuer la boucle de simulation.
  */
 public class BoidmàjEvent extends Event {
-    private BoidSystem system;
-    private BoidSimulateur simulator;
-    private long delay;
+    private final BoidSystem system;
+    private final BoidSimulateur simulator;
+    private final long delay;
 
     /**
      * Constructeur qui crée un événement de mise à jour.
-     * @param date la date à laquelle cet événement doit se produire
-     * @param system le système de boids concerné (proies ou prédateurs)
+     *
+     * @param date      la date à laquelle cet événement doit se produire
+     * @param system    le système de boids concerné (proies ou prédateurs)
      * @param simulator le simulateur qui gère l'affichage
-     * @param delay le délai avant la prochaine mise à jour (fréquence de rafraîchissement)
+     * @param delay     le délai avant la prochaine mise à jour (fréquence de rafraîchissement)
      */
     public BoidmàjEvent(long date, BoidSystem system, BoidSimulateur simulator, long delay) {
         super(date);

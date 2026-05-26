@@ -16,6 +16,7 @@ public class Vecteur2D {
 
     /**
      * Constructeur avec les coordonnées données
+     *
      * @param x la coordonnée en x
      * @param y la coordonnée en y
      */
@@ -26,6 +27,7 @@ public class Vecteur2D {
 
     /**
      * Constructeur de copie
+     *
      * @param v le vecteur à copier
      */
     public Vecteur2D(Vecteur2D v) {
@@ -35,6 +37,7 @@ public class Vecteur2D {
 
     /**
      * Addition de deux vecteurs
+     *
      * @param v le vecteur à ajouter
      * @return un nouveau vecteur égal à la somme
      */
@@ -44,6 +47,7 @@ public class Vecteur2D {
 
     /**
      * Soustraction de deux vecteurs
+     *
      * @param v le vecteur à soustraire
      * @return un nouveau vecteur égal à la différence
      */
@@ -53,6 +57,7 @@ public class Vecteur2D {
 
     /**
      * Multiplication par un scalaire.
+     *
      * @param scalar le coefficient multiplicateur
      * @return un nouveau vecteur multiplié par le scalaire
      */
@@ -62,6 +67,7 @@ public class Vecteur2D {
 
     /**
      * Division par un scalaire
+     *
      * @param scalar le coefficient diviseur
      * @return un nouveau vecteur divisé par le scalaire
      */
@@ -81,6 +87,7 @@ public class Vecteur2D {
 
     /**
      * Normalisation du vecteur pour obtenir un vecteur de norme 1
+     *
      * @return un nouveau vecteur normalisé
      */
     public Vecteur2D normalize() {
@@ -93,6 +100,7 @@ public class Vecteur2D {
 
     /**
      * Limite la norme du vecteur à une valeur maximale
+     *
      * @param max la norme maximale autorisée
      * @return un nouveau vecteur dont la norme ne dépasse pas max
      */
@@ -106,6 +114,7 @@ public class Vecteur2D {
 
     /**
      * Calcule la distance euclidienne
+     *
      * @param v l'autre vecteur
      * @return la distance entre les deux vecteurs
      */
@@ -115,6 +124,7 @@ public class Vecteur2D {
 
     /**
      * Produit scalaire
+     *
      * @param v l'autre vecteur
      * @return le produit scalaire
      */

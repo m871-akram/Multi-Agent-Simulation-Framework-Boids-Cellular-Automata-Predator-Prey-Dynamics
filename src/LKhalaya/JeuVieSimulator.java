@@ -3,7 +3,7 @@ package LKhalaya;
 import gui.GUISimulator;
 import gui.Rectangle;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Simulateur pour le Jeu de la Vie de Conway.
@@ -16,11 +16,11 @@ public class JeuVieSimulator extends CellularSimulator {
     private final Color deadColor;
 
     /**
-     * @param gui l'interface graphique
-     * @param grid la grille du jeu de la vie
-     * @param cellHalf paramètre "size" du Rectangle du gui.jar (moitié de côté)
+     * @param gui        l'interface graphique
+     * @param grid       la grille du jeu de la vie
+     * @param cellHalf   paramètre "size" du Rectangle du gui.jar (moitié de côté)
      * @param aliveColor couleur des cellules vivantes
-     * @param deadColor couleur des cellules mortes
+     * @param deadColor  couleur des cellules mortes
      */
     public JeuVieSimulator(GUISimulator gui, JeuVie grid, int cellHalf, Color aliveColor, Color deadColor) {
         super(gui, cellHalf);

@@ -8,6 +8,7 @@ public abstract class Event {
 
     /**
      * Constructeur qui initialise un événement avec sa date d'exécution
+     *
      * @param date la date (en pas de temps) à laquelle cet événement doit s'exécuter
      */
     public Event(long date) {

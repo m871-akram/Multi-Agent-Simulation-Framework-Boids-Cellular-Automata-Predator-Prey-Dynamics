@@ -2,7 +2,9 @@ package LKhalaya;
 
 import java.util.Random;
 
-/** Modèle du jeu de l'immigration (généralisation du jeu de la vie). */
+/**
+ * Modèle du jeu de l'immigration (généralisation du jeu de la vie).
+ */
 public class ImmigrationGrid extends CellularGrid {
     private final int nStates;         // nombre d'états (ex : 4)
     private final int[][] init;        // état initial
@@ -15,7 +17,9 @@ public class ImmigrationGrid extends CellularGrid {
         this.current = new int[rows][cols];
     }
 
-    /** Initialisation aléatoire : chaque cellule prend un état entre 0 et n-1. */
+    /**
+     * Initialisation aléatoire : chaque cellule prend un état entre 0 et n-1.
+     */
     public void randomInit(long seed) {
         Random r = new Random(seed);
         for (int i = 0; i < rows; i++) {
@@ -27,7 +31,9 @@ public class ImmigrationGrid extends CellularGrid {
         }
     }
 
-    /** Réinitialise la grille à son état de départ. */
+    /**
+     * Réinitialise la grille à son état de départ.
+     */
     @Override
     public void reInit() {
         for (int i = 0; i < rows; i++) {
@@ -35,12 +41,16 @@ public class ImmigrationGrid extends CellularGrid {
         }
     }
 
-    /** Renvoie l'état d'une cellule. */
+    /**
+     * Renvoie l'état d'une cellule.
+     */
     public int getState(int i, int j) {
         return current[i][j];
     }
 
-    /** Calcule l'état suivant (tous en même temps, grille torique). */
+    /**
+     * Calcule l'état suivant (tous en même temps, grille torique).
+     */
     @Override
     public void step() {
         int[][] next = new int[rows][cols];
@@ -63,7 +73,9 @@ public class ImmigrationGrid extends CellularGrid {
         current = next;
     }
 
-    /** Compte le nombre de voisines dans un état donné (grille torique). */
+    /**
+     * Compte le nombre de voisines dans un état donné (grille torique).
+     */
     private int countNeighborsWithState(int i, int j, int targetState) {
         int count = 0;
         for (int di = -1; di <= 1; di++) {

@@ -3,10 +3,9 @@ package Koora;
 import gui.GUISimulator;
 import gui.Oval;
 import gui.Simulable;
-import java.awt.Color;
-import java.awt.Point;
-
 import multi_agents.EvenT.EventManager;
+
+import java.awt.*;
 
 /**
  * Relie la classe Balls (logique) à l'interface graphique GUISimulator.
@@ -14,10 +13,10 @@ import multi_agents.EvenT.EventManager;
  */
 public class BallsSimulator implements Simulable {
     public GUISimulator gui;   // la fenêtre graphique
-    private Balls balls;        // le modèle logique
-    private Color ballColor;    // couleur des balles
-    private int rayon;
     public EventManager manager;// rayon des balles
+    private final Balls balls;        // le modèle logique
+    private final Color ballColor;    // couleur des balles
+    private final int rayon;
 
     /**
      * Constructeur : associe la simulation à la GUI.

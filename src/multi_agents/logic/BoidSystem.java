@@ -19,28 +19,29 @@ public abstract class BoidSystem {
     protected double poiDESeparation;
     protected int width;
     protected int height;
-    
+
     // Liste des autres systèmes pour les interactions inter-groupes
     protected List<BoidSystem> interGroups;
 
     /**
      * Constructeur qui initialise un système avec un certain nombre de boids
-     * @param nbBoids le nombre de boids à créer dans ce système
-     * @param width la largeur de la zone de simulation
-     * @param height la hauteur de la zone de simulation
-     * @param rayonVision le rayon dans lequel un boid peut voir ses voisins
-     * @param distanceSep la distance minimale à respecter entre boids
-     * @param Vmax la vitesse maximale autorisée pour les boids
-     * @param Fmax la force de steering maximale (pour des mouvements fluides)
-     * @param angleVision l'angle de vision
-     * @param poiDECohesion l'importance de la règle de cohésion
+     *
+     * @param nbBoids         le nombre de boids à créer dans ce système
+     * @param width           la largeur de la zone de simulation
+     * @param height          la hauteur de la zone de simulation
+     * @param rayonVision     le rayon dans lequel un boid peut voir ses voisins
+     * @param distanceSep     la distance minimale à respecter entre boids
+     * @param Vmax            la vitesse maximale autorisée pour les boids
+     * @param Fmax            la force de steering maximale (pour des mouvements fluides)
+     * @param angleVision     l'angle de vision
+     * @param poiDECohesion   l'importance de la règle de cohésion
      * @param poiDEAlignement le poids de la règle d'alignement
      * @param poiDESeparation le poids de la règle de séparation
      */
     public BoidSystem(int nbBoids, int width, int height,
-                               double rayonVision, double distanceSep, double Vmax,
-                               double Fmax, double angleVision,
-                               double poiDECohesion, double poiDEAlignement, double poiDESeparation) {
+                      double rayonVision, double distanceSep, double Vmax,
+                      double Fmax, double angleVision,
+                      double poiDECohesion, double poiDEAlignement, double poiDESeparation) {
         this.boids = new ArrayList<>();
         this.width = width;
         this.height = height;
@@ -67,13 +68,14 @@ public abstract class BoidSystem {
      * C'est ici que chaque type de boid va définir son comportement spécifique
      */
     public abstract void step();
-    
+
     /**
      * Permet d'éviter instanceof et respecter le principe du polymorphisme
+     *
      * @return true si ce système représente des prédateurs, false sinon
      */
     public abstract boolean estpredateur();
-    
+
     /**
      * @return true si ce système représente des proies, false sinon
      */
@@ -81,6 +83,7 @@ public abstract class BoidSystem {
 
     /**
      * Réinitialise le système en recréant un nombre spécifique de boids
+     *
      * @param nbBoids le nouveau nombre de boids à créer
      */
     public void reInit(int nbBoids) {
@@ -116,9 +119,10 @@ public abstract class BoidSystem {
         this.interGroups = others;
     }
 
-    
+
     /**
      * Méthode pour mettre à jour tous les boids avec leurs accélérations respectives
+     *
      * @param accelerations liste des vecteurs d'accélération (un par boid)
      */
     protected void màjBoids(List<Vecteur2D> accelerations) {

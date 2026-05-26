@@ -1,6 +1,6 @@
 package LKhalaya;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,9 +15,9 @@ public class SchellingGrid extends CellularGrid {
     private final int K;                // seuil de tolérance
     private final double vacantRatio;   // proportion de logements vides
     private final int[][] init;
-    private int[][] current;
-    private List<Point> emptyHouses;    // positions vides disponibles
     private final Random rand = new Random();
+    private final int[][] current;
+    private List<Point> emptyHouses;    // positions vides disponibles
 
     public SchellingGrid(int rows, int cols, int nColors, int K, double vacantRatio) {
         super(rows, cols);

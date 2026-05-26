@@ -11,20 +11,6 @@ import multi_agents.EvenT.EventManager;
  */
 public class TestEventManager {
 
-    static class MessageEvent extends Event {
-        private String message;
-
-        public MessageEvent(long date, String message) {
-            super(date);
-            this.message = message;
-        }
-
-        @Override
-        public void execute() {
-            System.out.println(getDate() + " " + message);
-        }
-    }
-
     public static void main(String[] args) throws InterruptedException {
 
         // On cr é e un s im ul at eu r
@@ -46,5 +32,19 @@ public class TestEventManager {
             Thread.sleep(1000);
         }
 
+    }
+
+    static class MessageEvent extends Event {
+        private final String message;
+
+        public MessageEvent(long date, String message) {
+            super(date);
+            this.message = message;
+        }
+
+        @Override
+        public void execute() {
+            System.out.println(getDate() + " " + message);
+        }
     }
 }

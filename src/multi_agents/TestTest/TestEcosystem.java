@@ -1,17 +1,18 @@
 package multi_agents.TestTest;
 
 import gui.GUISimulator;
-import multi_agents.logic.ProieBoidSystem;
 import multi_agents.logic.PredateurBoidSystem;
+import multi_agents.logic.ProieBoidSystem;
 import multi_agents.simulation.BoidSimulateur;
-import java.awt.Color;
+
+import java.awt.*;
 
 /**
- * Test pour observer l'évolution dynamique d'un écosystème proie-prédateur : 
+ * Test pour observer l'évolution dynamique d'un écosystème proie-prédateur :
  * - Les proies (bleues) se reproduisent si elles survivent assez longtemps et ont assez d'énergie
  * - Les prédateurs (rouges) perdent de l'énergie et doivent manger des proies pour survivre
  * - Les deux populations oscillent selon un modèle Lotka-Volterra simplifié
- *   beaucoup de proies → beaucoup de prédateurs → peu de proies → peu de prédateurs
+ * beaucoup de proies → beaucoup de prédateurs → peu de proies → peu de prédateurs
  * - Des couleurs plus sombres pour les boids affamés (énergie < 30)
  */
 public class TestEcosystem {
@@ -46,24 +47,24 @@ public class TestEcosystem {
         double predateurSeparationWeight = 1.2;
 
         ProieBoidSystem proies = new ProieBoidSystem(
-            nbProies, width, height,
-            proieVision, proieSeparationDist, proieVmax, proieFmax, proieVisionAngle,
-            proieCohesionWeight, proieAlignmentWeight, proieSeparationWeight
+                nbProies, width, height,
+                proieVision, proieSeparationDist, proieVmax, proieFmax, proieVisionAngle,
+                proieCohesionWeight, proieAlignmentWeight, proieSeparationWeight
         );
-        
+
         PredateurBoidSystem predateurs = new PredateurBoidSystem(
-            nbPredateurs, width, height,
-            predateurVision, predateurSeparationDist, predateurVmax, predateurFmax, predateurVisionAngle,
-            predateurCohesionWeight, predateurAlignmentWeight, predateurSeparationWeight
+                nbPredateurs, width, height,
+                predateurVision, predateurSeparationDist, predateurVmax, predateurFmax, predateurVisionAngle,
+                predateurCohesionWeight, predateurAlignmentWeight, predateurSeparationWeight
         );
 
         // Les proies sont bleues, les prédateurs rouges
         simulator.addSystem(proies, new Color(50, 150, 255), 1);      // Bleu clair
         simulator.addSystem(predateurs, new Color(255, 80, 80), 1);   // Rouge clair
-        
+
         // Lier les systèmes pour permettre les interactions
         simulator.linkSystems();
-        
+
         // Afficher l'état initial
         simulator.draw();
 

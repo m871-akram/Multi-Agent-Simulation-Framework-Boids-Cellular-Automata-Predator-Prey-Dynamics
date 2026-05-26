@@ -1,7 +1,8 @@
 package Koora;
 
 // src/Balls.java
-import java.awt.Point;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +11,17 @@ import java.util.List;
  * Cette classe ne contient aucune logique graphique.
  */
 public class Balls {
-    private List<Point> balls;           // positions courantes
-    private List<Point> PositionsInit; // positions initiales
-    private List<Point> Vitesse;       // vitesses (vx, vy)
-    private int rayon;                   // rayon des balles
+    private final List<Point> balls;           // positions courantes
+    private final List<Point> PositionsInit; // positions initiales
+    private final List<Point> Vitesse;       // vitesses (vx, vy)
+    private final int rayon;                   // rayon des balles
 
     /**
      * Constructeur : initialise les positions, vitesses et le rayon.
+     *
      * @param PositionsInit positions initiales des balles
-     * @param VitesseInit vitesses initiales des balles (vx, vy)
-     * @param rayon rayon des balles
+     * @param VitesseInit   vitesses initiales des balles (vx, vy)
+     * @param rayon         rayon des balles
      */
     public Balls(List<Point> PositionsInit, List<Point> VitesseInit, int rayon) {
         this.PositionsInit = new ArrayList<>();
@@ -36,10 +38,10 @@ public class Balls {
     }
 
 
-
     /**
      * Déplace toutes les balles selon leurs vitesses et gère les rebonds sur les bords.
-     * @param width largeur de la fenêtre
+     *
+     * @param width  largeur de la fenêtre
      * @param height hauteur de la fenêtre
      */
     public void Rebond(int width, int height) {

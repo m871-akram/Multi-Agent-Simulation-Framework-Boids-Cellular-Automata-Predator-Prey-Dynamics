@@ -1,16 +1,16 @@
 package multi_agents.EvenT;
 
-import java.util.PriorityQueue;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
- * Gestionnaire d'événements pour notre simulation 
+ * Gestionnaire d'événements pour notre simulation
  * Il gère une file de priorité où les événements sont triés par date
  * À chaque appel de next(), on exécute l'événement le plus ancien de la file
  */
 public class EventManager {
     private long currentDate;
-    private PriorityQueue<Event> events;
+    private final PriorityQueue<Event> events;
 
     /**
      * Constructeur qui initialise le gestionnaire
@@ -23,6 +23,7 @@ public class EventManager {
 
     /**
      * Ajoute un nouvel événement dans la file d'attente
+     *
      * @param e l'événement à ajouter
      */
     public void addEvent(Event e) {

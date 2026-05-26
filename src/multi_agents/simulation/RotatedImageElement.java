@@ -1,12 +1,12 @@
 package multi_agents.simulation;
 
 import gui.GraphicalElement;
-import java.awt.Color;
-import java.awt.Graphics2D;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
 
 /**
  * Élément graphique personnalisé qui affiche une image tournée.
@@ -14,23 +14,24 @@ import javax.imageio.ImageIO;
  * l'image de loupe que j aie retrouve dans le dossier fourni
  */
 public class RotatedImageElement implements GraphicalElement {
-    private int x;
-    private int y;
-    private String imagePath;
-    private int width;
-    private int height;
-    private double angle;
-    private Color tint;
+    private final int x;
+    private final int y;
+    private final String imagePath;
+    private final int width;
+    private final int height;
+    private final double angle;
+    private final Color tint;
 
     /**
      * Constructeur complet avec possibilité d'ajouter une teinte de couleur.
-     * @param x la position x du centre de l'image
-     * @param y la position y du centre de l'image
+     *
+     * @param x         la position x du centre de l'image
+     * @param y         la position y du centre de l'image
      * @param imagePath le chemin vers le fichier image
-     * @param width la largeur d'affichage
-     * @param height la hauteur d'affichage
-     * @param angle l'angle de rotation (en radians)
-     * @param tint une couleur de teinte à appliquer (ou null si pas de teinte)
+     * @param width     la largeur d'affichage
+     * @param height    la hauteur d'affichage
+     * @param angle     l'angle de rotation (en radians)
+     * @param tint      une couleur de teinte à appliquer (ou null si pas de teinte)
      */
     public RotatedImageElement(int x, int y, String imagePath, int width, int height, double angle, Color tint) {
         this.x = x;
@@ -58,7 +59,7 @@ public class RotatedImageElement implements GraphicalElement {
             // On crée une nouvelle transformation pour la rotation
             AffineTransform transform = new AffineTransform();
             transform.translate(x, y); // On se déplace au centre du boid
-            transform.rotate(angle + Math.toRadians(360-45)); // On applique la rotation + un offset que vous devrez deviner en regardant l image de la loupe
+            transform.rotate(angle + Math.toRadians(360 - 45)); // On applique la rotation + un offset que vous devrez deviner en regardant l image de la loupe
             transform.translate(-width / 2.0, -height / 2.0); // On recentre l'image
 
             // On applique la transformation

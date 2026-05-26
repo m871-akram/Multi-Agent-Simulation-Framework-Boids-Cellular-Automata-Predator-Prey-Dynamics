@@ -2,13 +2,13 @@ package multi_agents.simulation;
 
 import gui.GUISimulator;
 import gui.Simulable;
-import multi_agents.logic.BoidSystem;
-import multi_agents.logic.Boid;
-import multi_agents.logic.Vecteur2D;
 import multi_agents.EvenT.BoidmàjEvent;
 import multi_agents.EvenT.EventManager;
+import multi_agents.logic.Boid;
+import multi_agents.logic.BoidSystem;
+import multi_agents.logic.Vecteur2D;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,10 +18,11 @@ import java.util.Map;
 public class BoidSimulateur implements Simulable {
     protected final GUISimulator gui;
     protected final EventManager manager;
-    private Map<BoidSystem, Color> systems;
+    private final Map<BoidSystem, Color> systems;
 
     /**
      * Constructeur qui crée un simulateur de boids.
+     *
      * @param gui l'interface graphique où on va dessiner les boids
      */
     public BoidSimulateur(GUISimulator gui) {
@@ -48,9 +49,10 @@ public class BoidSimulateur implements Simulable {
 
     /**
      * Ajoute un nouveau système de boids à la simulation
+     *
      * @param system le système de boids (proies, prédateurs, etc.)
-     * @param color la couleur pour afficher ce groupe
-     * @param delay la fréquence de mise à jour (1 = rapide, 3 = plus lent, etc.)
+     * @param color  la couleur pour afficher ce groupe
+     * @param delay  la fréquence de mise à jour (1 = rapide, 3 = plus lent, etc.)
      */
     public void addSystem(BoidSystem system, Color color, long delay) {
         systems.put(system, color);
@@ -77,7 +79,7 @@ public class BoidSimulateur implements Simulable {
                 if (!b.estvivant()) {
                     continue;
                 }
-                
+
                 // On calcule l'angle pour orienter l'image selon la direction du boid
                 Vecteur2D vitesse = b.getVitesse();
                 double angle = Math.atan2(vitesse.y, vitesse.x);
@@ -87,22 +89,22 @@ public class BoidSimulateur implements Simulable {
                 if (b.getenergie() < 30) {
                     float factor = (float) (b.getenergie() / 30.0); // 0.0 à 1.0
                     color = new Color(
-                        (int) (Color.getRed() * factor),
-                        (int) (Color.getGreen() * factor),
-                        (int) (Color.getBlue() * factor)
+                            (int) (Color.getRed() * factor),
+                            (int) (Color.getGreen() * factor),
+                            (int) (Color.getBlue() * factor)
                     );
                 }
 
                 // On ajoute un élément graphique pour ce boid
                 Vecteur2D position = b.getPosition();
                 gui.addGraphicalElement(new RotatedImageElement(
-                    (int) position.x,
-                    (int) position.y,
-                    "doc/resources/glass.png", // L'image de la loupe que je sais pas pourquoi elle est fournie
-                    20, // Largeur
-                    20, // Hauteur
-                    angle, // Angle de rotation
-                    color // Couleur de teinte (ajustée selon l'énergie)
+                        (int) position.x,
+                        (int) position.y,
+                        "doc/resources/glass.png", // L'image de la loupe que je sais pas pourquoi elle est fournie
+                        20, // Largeur
+                        20, // Hauteur
+                        angle, // Angle de rotation
+                        color // Couleur de teinte (ajustée selon l'énergie)
                 ));
             }
         }
@@ -115,7 +117,7 @@ public class BoidSimulateur implements Simulable {
      */
     public void linkSystems() {
         java.util.List<BoidSystem> allSystems = new java.util.ArrayList<>(systems.keySet());
-        
+
         // Pour chaque système, on lui donne la liste de tous les autres systèmes
         for (BoidSystem system : allSystems) {
             java.util.List<BoidSystem> others = new java.util.ArrayList<>(allSystems);

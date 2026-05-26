@@ -12,15 +12,15 @@ import java.util.List;
 public class PredateurBoidSystem extends BoidSystem {
 
     /**
-     * @param nbBoids le nombre de prédateurs dans le système
-     * @param width la largeur de la zone de simulation
-     * @param height la hauteur de la zone de simulation
-     * @param rayonVision le rayon dans lequel un prédateur voit ses voisins (et les proies)
-     * @param distanceSep la distance minimale entre deux prédateurs
-     * @param Vmax la vitesse maximale d'un prédateur
-     * @param Fmax la force de steering maximale
-     * @param angleVision l'angle de vision en radians
-     * @param poiDECohesion l'importance de la cohésion entre prédateurs
+     * @param nbBoids         le nombre de prédateurs dans le système
+     * @param width           la largeur de la zone de simulation
+     * @param height          la hauteur de la zone de simulation
+     * @param rayonVision     le rayon dans lequel un prédateur voit ses voisins (et les proies)
+     * @param distanceSep     la distance minimale entre deux prédateurs
+     * @param Vmax            la vitesse maximale d'un prédateur
+     * @param Fmax            la force de steering maximale
+     * @param angleVision     l'angle de vision en radians
+     * @param poiDECohesion   l'importance de la cohésion entre prédateurs
      * @param poiDEAlignement l'importance de l'alignement
      * @param poiDESeparation l'importance de la séparation
      */
@@ -29,7 +29,7 @@ public class PredateurBoidSystem extends BoidSystem {
                                double Fmax, double angleVision,
                                double poiDECohesion, double poiDEAlignement, double poiDESeparation) {
         super(nbBoids, width, height, rayonVision, distanceSep, Vmax, Fmax, angleVision,
-              poiDECohesion, poiDEAlignement, poiDESeparation);
+                poiDECohesion, poiDEAlignement, poiDESeparation);
 
     }
 
@@ -42,11 +42,11 @@ public class PredateurBoidSystem extends BoidSystem {
     public void step() {
         List<Vecteur2D> accelerations = new ArrayList<>();
         List<Boid> proieAattraper = new ArrayList<>();
-        
+
         for (Boid predateur : boids) {
             // Métabolisme : les prédateurs perdent de l'énergie (plus vite que les proies)
             predateur.fatigue(0.5);
-            
+
             // Les trois règles de flocking
             Vecteur2D cohesion = LaLoi.cohesion(predateur, boids, rayonVision, angleVision);
             Vecteur2D alignment = LaLoi.alignment(predateur, boids, rayonVision, angleVision);
@@ -60,7 +60,7 @@ public class PredateurBoidSystem extends BoidSystem {
             Vecteur2D pursuit = new Vecteur2D(0, 0);
             Boid proieProche = null;
             double minDist = Double.MAX_VALUE;
-            
+
             // On parcourt tous les autres systèmes pour trouver des proies
             for (BoidSystem sys : interGroups) {
                 if (sys.estproie()) {
@@ -96,13 +96,13 @@ public class PredateurBoidSystem extends BoidSystem {
                 }
             }
         }
-        
+
         // On met à jour tous les boids
         màjBoids(accelerations);
         // Retirer les prédateurs morts (énergie épuisée)
         boids.removeIf(predateur -> !predateur.estvivant());
     }
-    
+
     /**
      * @return true car c'est un système de prédateurs
      */
@@ -110,7 +110,7 @@ public class PredateurBoidSystem extends BoidSystem {
     public boolean estpredateur() {
         return true;
     }
-    
+
     /**
      * @return false car c'est un système de prédateurs
      */
