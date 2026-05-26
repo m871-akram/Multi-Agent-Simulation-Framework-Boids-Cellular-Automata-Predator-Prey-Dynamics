@@ -12,11 +12,11 @@ import java.awt.*;
  * Elle implémente Simulable pour répondre aux boutons "Suivant" et "Début".
  */
 public class BallsSimulator implements Simulable {
-    public GUISimulator gui;   // la fenêtre graphique
-    public EventManager manager;// rayon des balles
     private final Balls balls;        // le modèle logique
     private final Color ballColor;    // couleur des balles
     private final int rayon;
+    public GUISimulator gui;   // la fenêtre graphique
+    public EventManager manager;// rayon des balles
 
     /**
      * Constructeur : associe la simulation à la GUI.

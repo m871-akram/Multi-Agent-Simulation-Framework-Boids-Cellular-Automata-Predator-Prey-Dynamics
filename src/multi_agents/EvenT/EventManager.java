@@ -9,8 +9,8 @@ import java.util.PriorityQueue;
  * À chaque appel de next(), on exécute l'événement le plus ancien de la file
  */
 public class EventManager {
-    private long currentDate;
     private final PriorityQueue<Event> events;
+    private long currentDate;
 
     /**
      * Constructeur qui initialise le gestionnaire
