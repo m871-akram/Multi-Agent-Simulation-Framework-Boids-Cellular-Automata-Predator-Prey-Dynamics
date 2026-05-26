@@ -114,6 +114,21 @@ Cela permet des fréquences d'update distinctes par système et une simulation r
 
 ---
 
+## JavaDoc
+
+```bash
+javadoc -private -d doc/javadoc \
+        -classpath lib/gui.jar \
+        -sourcepath src \
+        -subpackages Koora:LKhalaya:multi_agents \
+        -encoding UTF-8 \
+        -charset UTF-8
+```
+
+This generates HTML documentation under `doc/javadoc/`. Open `doc/javadoc/index.html` in a browser to browse it.
+
+---
+
 ## Tests
 
 | Classe | Scénario |

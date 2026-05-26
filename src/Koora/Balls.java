@@ -96,6 +96,7 @@ public class Balls {
         return copy;
     }
 
+    /** Returns the radius of the balls. */
     public int getRayon() {
         return rayon;
     }

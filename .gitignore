@@ -3,6 +3,9 @@ bin/
 out/
 *.class
 
+# Generated JavaDoc
+doc/javadoc/
+
 # IntelliJ IDEA
 .idea/
 *.iml

@@ -30,11 +30,13 @@ public class JeuVieSimulator extends CellularSimulator {
         draw(); // dessin initial après initialisation complète
     }
 
+    /** Returns the Conway grid managed by this simulator. */
     @Override
     protected CellularGrid getGrid() {
         return grid;
     }
 
+    /** Draws each cell as a colored square using aliveColor or deadColor. */
     @Override
     protected void draw() {
         gui.reset();

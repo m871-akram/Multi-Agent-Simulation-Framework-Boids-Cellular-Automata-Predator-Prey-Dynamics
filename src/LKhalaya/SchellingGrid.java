@@ -19,6 +19,7 @@ public class SchellingGrid extends CellularGrid {
     private final int[][] current;
     private List<Point> emptyHouses;    // positions vides disponibles
 
+    /** Builds a grid with the given dimensions, number of families, tolerance threshold, and vacancy rate. */
     public SchellingGrid(int rows, int cols, int nColors, int K, double vacantRatio) {
         super(rows, cols);
         this.nColors = nColors;
@@ -55,6 +56,7 @@ public class SchellingGrid extends CellularGrid {
         }
     }
 
+    /** Resets the grid to its original random placement. */
     @Override
     public void reInit() {
         for (int i = 0; i < rows; i++) {
@@ -62,6 +64,7 @@ public class SchellingGrid extends CellularGrid {
         }
     }
 
+    /** Moves each unhappy family to a random vacant house. */
     @Override
     public void step() {
         List<Point> unhappy = new ArrayList<>();
@@ -114,6 +117,7 @@ public class SchellingGrid extends CellularGrid {
         return total > 0 && diff > K;
     }
 
+    /** Returns the family color at cell (i, j), or 0 if the house is vacant. */
     public int getState(int i, int j) {
         return current[i][j];
     }

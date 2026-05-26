@@ -12,6 +12,7 @@ public class SchellingSimulator extends CellularSimulator {
     private final SchellingGrid grid;
     private final Color[] palette; // couleurs associées aux familles
 
+    /** Wires up the grid and color palette, then draws the initial state. */
     public SchellingSimulator(GUISimulator gui, SchellingGrid grid, int cellHalf, Color[] palette) {
         super(gui, cellHalf);
         this.grid = grid;
@@ -19,11 +20,13 @@ public class SchellingSimulator extends CellularSimulator {
         draw();
     }
 
+    /** Returns the Schelling grid managed by this simulator. */
     @Override
     protected CellularGrid getGrid() {
         return grid;
     }
 
+    /** Draws each cell as white if vacant, or in the corresponding family color. */
     @Override
     protected void draw() {
         gui.reset();

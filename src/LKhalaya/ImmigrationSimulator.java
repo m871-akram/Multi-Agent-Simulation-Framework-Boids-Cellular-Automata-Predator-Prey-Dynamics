@@ -14,6 +14,7 @@ public class ImmigrationSimulator extends CellularSimulator {
     private final ImmigrationGrid grid;
     private final Color[] palette; // couleurs associées aux états
 
+    /** Wires up the grid and color palette, then draws the initial state. */
     public ImmigrationSimulator(GUISimulator gui, ImmigrationGrid grid, Color[] palette, int cellHalf) {
         super(gui, cellHalf);
         this.grid = grid;
@@ -21,11 +22,13 @@ public class ImmigrationSimulator extends CellularSimulator {
         draw(); // dessin initial après initialisation complète
     }
 
+    /** Returns the immigration grid managed by this simulator. */
     @Override
     protected CellularGrid getGrid() {
         return grid;
     }
 
+    /** Draws each cell as a colored square based on its current state. */
     @Override
     protected void draw() {
         gui.reset();

@@ -10,6 +10,7 @@ public class ImmigrationGrid extends CellularGrid {
     private final int[][] init;        // état initial
     private int[][] current;           // état courant
 
+    /** Creates an empty immigration grid with the given dimensions and number of states. */
     public ImmigrationGrid(int rows, int cols, int nStates) {
         super(rows, cols);
         this.nStates = nStates;

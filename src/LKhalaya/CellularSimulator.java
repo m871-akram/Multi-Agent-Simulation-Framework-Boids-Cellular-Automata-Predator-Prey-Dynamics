@@ -40,12 +40,14 @@ public abstract class CellularSimulator implements Simulable {
      */
     protected abstract void draw();
 
+    /** Advances the simulation by one step and redraws. */
     @Override
     public void next() {
         getGrid().step();
         draw();
     }
 
+    /** Resets the grid to its initial state and redraws. */
     @Override
     public void restart() {
         getGrid().reInit();
