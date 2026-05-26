@@ -1,4 +1,4 @@
-# JAVA\_POO — Simulations GUI + Multi-Agents (Boids)
+# Multi-Agent-Simulation-Framework-Boids-Cellular-Automata-Predator-Prey-Dynamics
 
 Projet pédagogique POO en deux volets :
 
@@ -6,8 +6,6 @@ Projet pédagogique POO en deux volets :
 - **Simulation multi-agents** : boids avec interactions proies/prédateurs et écosystème dynamique (énergie, vieillissement, reproduction, mort)
 
 ---
-
-## Lancement rapide
 
 **Prérequis :** JDK 8+. macOS/Linux utilisent `:` dans le classpath ; Windows utilise `;`.
 
@@ -142,5 +140,4 @@ Idées : obstacles/attracteurs, super-prédateurs, ressources végétales, ajust
 - Reynolds, C. (1987) — *Flocks, herds and schools*
 - Shiffman, D. — *The Nature of Code*, chap. 6
 - Lotka–Volterra — dynamiques proies/prédateurs (modèle discret)
-
-Voir aussi : `ARCHITECTURE.md` (diagrammes Mermaid + flux), `doc/index.html` (API GUI).
+- `ARCHITECTURE.md` (diagrammes Mermaid + flux), `doc/index.html` (API GUI).
