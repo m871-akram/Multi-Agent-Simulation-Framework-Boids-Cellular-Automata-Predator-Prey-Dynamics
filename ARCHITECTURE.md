@@ -181,17 +181,3 @@ flowchart TB
 
 - `draw()` efface la scène et dessine chaque boid vivant via `RotatedImageElement`.
 - Couleur assombrie si énergie < 30 ; cercle de secours si l'image sprite est absente.
-
----
-
-## Correspondance de noms (docs historiques → code)
-
-| Ancien nom         | Nom actuel           |
-|--------------------|----------------------|
-| AbstractBoidSystem | BoidSystem           |
-| PreyBoidSystem     | ProieBoidSystem      |
-| PredatorBoidSystem | PredateurBoidSystem  |
-| BoidSimulator      | BoidSimulateur       |
-| BoidUpdateEvent    | BoidmàjEvent         |
-
-Voir `README.md` pour les commandes de lancement et la conception détaillée.
